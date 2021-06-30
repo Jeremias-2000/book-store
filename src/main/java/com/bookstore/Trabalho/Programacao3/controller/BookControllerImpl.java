@@ -11,6 +11,6 @@ public class BookControllerImpl implements BookController{
 
     @Override
     public String testeEndpoint() {
-        return "deu certo";
+        return "<h1>deu certo</h1>";
     }
 }
