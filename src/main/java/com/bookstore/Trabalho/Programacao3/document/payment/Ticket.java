@@ -1,5 +1,4 @@
-package com.bookstore.Trabalho.Programacao3.document;
-
+package com.bookstore.Trabalho.Programacao3.document.payment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,23 +7,17 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 
 @Document
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Ticket {
 
     @Id
-    private String userId;
-
-    private String  userName;
-    private Date birthDay;
-    private String password;
-    private String email;
-    private String cpf;
-    private Address address;
+    private String ticketId;
+    private Integer number;
+    private LocalDate dueDate;
 }

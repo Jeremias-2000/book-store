@@ -1,14 +1,15 @@
-package com.bookstore.Trabalho.Programacao3.service;
+package com.bookstore.Trabalho.Programacao3.service.impl;
 
 import com.bookstore.Trabalho.Programacao3.document.Book;
 import com.bookstore.Trabalho.Programacao3.repository.BookRepository;
+import com.bookstore.Trabalho.Programacao3.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BookServiceImpl implements BookService<Book>{
+public class BookServiceImpl implements BookService<Book> {
 
     @Autowired
     private BookRepository bookRepository;
