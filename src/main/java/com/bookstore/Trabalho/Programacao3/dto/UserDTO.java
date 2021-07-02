@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Data
@@ -16,11 +17,16 @@ import java.util.Date;
 public class UserDTO {
 
     private String userId;
-
+    @NotEmpty
     private String  userName;
+    @NotEmpty
     private Date birthDay;
+    @NotEmpty
     private String password;
+    @NotEmpty
     private String email;
-
+    @NotEmpty
+    private String cpf;
+    @NotEmpty
     private Address address;
 }

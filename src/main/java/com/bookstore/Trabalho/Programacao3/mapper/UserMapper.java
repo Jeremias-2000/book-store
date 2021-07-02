@@ -6,20 +6,20 @@ import com.bookstore.Trabalho.Programacao3.dto.UserDTO;
 
 public class UserMapper {
 
-    public User mapToModel(UserDTO dto){
+    public static User mapToModel(UserDTO dto){
         return User.builder()
                 .userId(dto.getUserId())
                 .userName(dto.getUserName())
                 .birthDay(dto.getBirthDay())
                 .password(dto.getPassword())
                 .email(dto.getEmail())
-
+                .cpf(dto.getCpf())
                 .address(dto.getAddress())
                 .build();
     }
 
 
-    public UserDTO mapToDTO(User user){
+    public static UserDTO mapToDTO(User user){
         return UserDTO.builder().
                 userId(user.getUserId())
                 .userName(user.getUserName())

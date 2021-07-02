@@ -1,22 +1,20 @@
 package com.bookstore.Trabalho.Programacao3.document.payment;
 
 
+import com.bookstore.Trabalho.Programacao3.enums.FlagType;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 
 @Data
-public class CreditCard extends Ticket{
+public class CreditCard {
 
+    private String cardName;
+    private String number;
+    private LocalDate expirationTime;
+    private FlagType flagType;
     private String cvv;
 
-    public CreditCard(String cvv) {
-        this.cvv = cvv;
-    }
-
-    public CreditCard(String ticketId, Integer number, LocalDate dueDate, String cvv) {
-        super(ticketId, number, dueDate);
-        this.cvv = cvv;
-    }
 }
