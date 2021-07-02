@@ -1,42 +1,46 @@
 package com.bookstore.Trabalho.Programacao3.service.impl;
 
 import com.bookstore.Trabalho.Programacao3.document.Book;
+import com.bookstore.Trabalho.Programacao3.dto.BookDTO;
+import com.bookstore.Trabalho.Programacao3.mapper.BookMapper;
 import com.bookstore.Trabalho.Programacao3.repository.BookRepository;
 import com.bookstore.Trabalho.Programacao3.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class BookServiceImpl implements BookService<Book> {
+public class BookServiceImpl implements BookService<BookDTO> {
 
     @Autowired
     private BookRepository bookRepository;
 
-
     @Override
-    public List<Book> findBooks() {
-        return bookRepository.findAll();
+    public List<BookDTO> findBooks() {
+        return bookRepository.findAll()
+                .stream().map(BookMapper::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Book findBookById(String bookId) {
+    public BookDTO findBookById(String bookId) {
         return null;
     }
 
     @Override
-    public Book findBookByName(String name) {
+    public BookDTO findBookByName(String name) {
         return null;
     }
 
     @Override
-    public Book createBook(Book book) {
+    public BookDTO createBook(BookDTO book) {
         return null;
     }
 
     @Override
-    public Book updateBook(String bookId,Book book) {
+    public BookDTO updateBook(String bookId, BookDTO book) {
         return null;
     }
 
@@ -46,12 +50,12 @@ public class BookServiceImpl implements BookService<Book> {
     }
 
     @Override
-    public void checkIfBookIsNull(Book book) {
+    public void checkIfBookIsNull(BookDTO book) {
 
     }
 
     @Override
-    public void checkIfBookAlreadyRegistered(Book book) {
+    public void checkIfBookAlreadyRegistered(BookDTO book) {
 
     }
 }
