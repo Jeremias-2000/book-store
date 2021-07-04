@@ -2,6 +2,7 @@ package com.bookstore.Trabalho.Programacao3.dto;
 
 
 import com.bookstore.Trabalho.Programacao3.document.Address;
+import com.bookstore.Trabalho.Programacao3.document.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,16 +18,26 @@ import java.util.Date;
 public class UserDTO {
 
     private String userId;
-    @NotEmpty
+
     private String  userName;
-    @NotEmpty
+
     private Date birthDay;
-    @NotEmpty
+
     private String password;
-    @NotEmpty
+
     private String email;
-    @NotEmpty
+
     private String cpf;
-    @NotEmpty
+
     private Address address;
+
+    public UserDTO(User user) {
+        this.userId = user.getUserId();
+        this.userName = user.getUserName();
+        this.birthDay = user.getBirthDay();
+        this.password = user.getPassword();
+        this.email = user.getEmail();
+        this.cpf = user.getCpf();
+        this.address = user.getAddress();
+    }
 }

@@ -22,18 +22,18 @@ public class User {
 
     @Id
     private String userId;
-    @NotEmpty
+
     private String  userName;
-    @NotEmpty
+
     private Date birthDay;
-    @NotEmpty
+
     private String password;
-    @NotEmpty
+
     private String email;
-    @NotEmpty
+
     private String cpf;
 
     private CreditCard creditCard;
-    @NotEmpty
+
     private Address address;
 }

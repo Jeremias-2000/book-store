@@ -1,5 +1,6 @@
 package com.bookstore.Trabalho.Programacao3.document.payment;
 
+import com.bookstore.Trabalho.Programacao3.document.User;
 import com.bookstore.Trabalho.Programacao3.enums.PaymentMethods;
 import com.bookstore.Trabalho.Programacao3.enums.Status;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -24,9 +25,11 @@ public class Payment {
 
     @Id
     private String paymentId;
+    private User user;
     private Double price;
     private LocalDate registrationDate;
     private PaymentMethods paymentMethod;
     private PaymentSlip paymentSlip;
     private Status status;
+    private CreditCard creditCard;
 }

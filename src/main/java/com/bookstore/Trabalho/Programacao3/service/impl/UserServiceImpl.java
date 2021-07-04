@@ -1,6 +1,7 @@
 package com.bookstore.Trabalho.Programacao3.service.impl;
 
 
+import com.bookstore.Trabalho.Programacao3.document.User;
 import com.bookstore.Trabalho.Programacao3.dto.UserDTO;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionByNullUser;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionPerExistingUser;
@@ -10,6 +11,7 @@ import com.bookstore.Trabalho.Programacao3.repository.UserRepository;
 import com.bookstore.Trabalho.Programacao3.service.AbstractUserService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,20 +22,23 @@ import static java.util.Optional.*;
 
 
 @Service
-@RequiredArgsConstructor
+
 public class UserServiceImpl implements AbstractUserService<UserDTO> {
 
-
+    @Autowired
     private UserRepository userRepository;
 
     @Override
     public List<UserDTO> findUsers() {
         return userRepository.findAll()
-                .stream().map(UserMapper:: mapToDTO)
+                .stream().map(UserMapper::mapToDTO)
                 .collect(Collectors.toList());
     }
 
 
+    public List<UserDTO> convertToListUserDTO(List<User> users) {
+        return users.stream().map(UserDTO::new).collect(Collectors.toList());
+    }
 
     @Override
     public UserDTO findUserById(String userId) {
