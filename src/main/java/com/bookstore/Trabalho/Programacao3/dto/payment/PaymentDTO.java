@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class PaymentDTO {
 
     private String paymentId;
-    private User user;
+    private String userId;
     private Double price;
     private LocalDate registrationDate;
     private PaymentMethods paymentMethod;

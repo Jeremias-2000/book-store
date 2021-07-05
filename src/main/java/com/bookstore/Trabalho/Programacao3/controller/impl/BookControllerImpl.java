@@ -4,6 +4,7 @@ package com.bookstore.Trabalho.Programacao3.controller.impl;
 import com.bookstore.Trabalho.Programacao3.controller.BookController;
 import com.bookstore.Trabalho.Programacao3.dto.BookDTO;
 import com.bookstore.Trabalho.Programacao3.service.impl.BookServiceImpl;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/book")
-
-@CrossOrigin
+@Api(value = "Books")
+@CrossOrigin(origins = "*")
 public class BookControllerImpl implements BookController {
 
     @Autowired

@@ -1,7 +1,7 @@
 package com.bookstore.Trabalho.Programacao3.dto.payment;
 
 
-import com.bookstore.Trabalho.Programacao3.dto.UserDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +14,6 @@ import lombok.ToString;
 public class RequestPaymentDTO {
 
     private PaymentDTO payment;
-    private UserDTO user;
+    private String userId;
 
 }

@@ -5,6 +5,7 @@ import com.bookstore.Trabalho.Programacao3.document.User;
 import com.bookstore.Trabalho.Programacao3.document.payment.CreditCard;
 import com.bookstore.Trabalho.Programacao3.document.payment.Payment;
 import com.bookstore.Trabalho.Programacao3.document.payment.PaymentSlip;
+import com.bookstore.Trabalho.Programacao3.dto.UserDTO;
 import com.bookstore.Trabalho.Programacao3.dto.payment.PaymentDTO;
 import com.bookstore.Trabalho.Programacao3.dto.payment.RequestPaymentDTO;
 import com.bookstore.Trabalho.Programacao3.dto.payment.ResponsePaymentDTO;
@@ -29,7 +30,7 @@ import java.util.Optional;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PaymentServiceImpl implements AbstractPaymentService{
 
-
+    private UserServiceImpl userService;
     private ConversionService conversionService;
     private PaymentRepository paymentRepository;
     private PaymentSlipServiceImpl paymentSlipService;
@@ -49,21 +50,20 @@ public class PaymentServiceImpl implements AbstractPaymentService{
     public ResponsePaymentDTO createPayment(RequestPaymentDTO requestPaymentDTO) {
         Payment responsePayment = new Payment();
         ResponsePaymentDTO responsePaymentDTO = new ResponsePaymentDTO();
+
         Payment payment = conversionService.convert(requestPaymentDTO.getPayment(),Payment.class);
-        User  user = conversionService.convert(requestPaymentDTO.getUser(),User.class);
+        UserDTO userDTO = userService.findUserById(requestPaymentDTO.getUserId());
 
 
-        payment.setUser(user);
+        payment.setUserId(userDTO.getUserId());
 
         if (PaymentMethods.CREDIT_CARD.equals(payment.getPaymentMethod())){
-            CreditCard creditCard = payment.getUser().getCreditCard();
-            creditCard.setFlagType(creditCard.getFlagType());
-            payment.setCreditCard(user.getCreditCard());
+            payment.setCreditCard(userDTO.getCreditCard());
             payment.setStatus(Status.SENT);
 
         }else if(PaymentMethods.TICKET.equals(payment.getPaymentMethod())){
-            PaymentSlip paymentSlip = paymentSlipService.generatePaymentSlip();
 
+            PaymentSlip paymentSlip = paymentSlipService.generatePaymentSlip();
             paymentSlipService.savePaymentSlip(PaymentSlipMapper.mapToDTO(paymentSlip));
 
             payment.setPaymentSlip(paymentSlip);

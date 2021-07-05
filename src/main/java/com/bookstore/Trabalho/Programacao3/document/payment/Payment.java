@@ -25,7 +25,7 @@ public class Payment {
 
     @Id
     private String paymentId;
-    private User user;
+    private String userId;
     private Double price;
     private LocalDate registrationDate;
     private PaymentMethods paymentMethod;
