@@ -2,7 +2,7 @@ package com.bookstore.Trabalho.Programacao3.mapper;
 
 import com.bookstore.Trabalho.Programacao3.document.User;
 
-import com.bookstore.Trabalho.Programacao3.dto.UserDTO;
+import com.bookstore.Trabalho.Programacao3.dto.user.UserDTO;
 
 public class UserMapper {
 

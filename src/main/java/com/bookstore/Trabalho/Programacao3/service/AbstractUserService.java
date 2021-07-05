@@ -1,7 +1,7 @@
 package com.bookstore.Trabalho.Programacao3.service;
 
 
-import com.bookstore.Trabalho.Programacao3.dto.UserDTO;
+import com.bookstore.Trabalho.Programacao3.dto.user.UserDTO;
 
 import java.util.List;
 import java.util.Optional;

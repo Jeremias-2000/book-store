@@ -1,11 +1,9 @@
 package com.bookstore.Trabalho.Programacao3.service.impl;
 
 
-import com.bookstore.Trabalho.Programacao3.document.User;
-import com.bookstore.Trabalho.Programacao3.document.payment.CreditCard;
 import com.bookstore.Trabalho.Programacao3.document.payment.Payment;
 import com.bookstore.Trabalho.Programacao3.document.payment.PaymentSlip;
-import com.bookstore.Trabalho.Programacao3.dto.UserDTO;
+import com.bookstore.Trabalho.Programacao3.dto.user.UserDTO;
 import com.bookstore.Trabalho.Programacao3.dto.payment.PaymentDTO;
 import com.bookstore.Trabalho.Programacao3.dto.payment.RequestPaymentDTO;
 import com.bookstore.Trabalho.Programacao3.dto.payment.ResponsePaymentDTO;

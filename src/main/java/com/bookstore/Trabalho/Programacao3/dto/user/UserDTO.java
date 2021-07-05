@@ -1,4 +1,4 @@
-package com.bookstore.Trabalho.Programacao3.dto;
+package com.bookstore.Trabalho.Programacao3.dto.user;
 
 
 import com.bookstore.Trabalho.Programacao3.document.Address;

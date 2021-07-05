@@ -1,7 +1,7 @@
 package com.bookstore.Trabalho.Programacao3.mapper;
 
 import com.bookstore.Trabalho.Programacao3.document.payment.CreditCard;
-import com.bookstore.Trabalho.Programacao3.dto.CreditCardDTO;
+import com.bookstore.Trabalho.Programacao3.dto.user.CreditCardDTO;
 
 public class CreditCardMapper {
 

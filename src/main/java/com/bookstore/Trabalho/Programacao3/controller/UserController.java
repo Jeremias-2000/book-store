@@ -1,6 +1,6 @@
 package com.bookstore.Trabalho.Programacao3.controller;
 
-import com.bookstore.Trabalho.Programacao3.dto.UserDTO;
+import com.bookstore.Trabalho.Programacao3.dto.user.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

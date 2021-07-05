@@ -26,4 +26,6 @@ public class BookDTO {
     private Date launchData;
     @NotEmpty
     private String price;
+
+    private int quantity;
 }

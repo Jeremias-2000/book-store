@@ -1,10 +1,9 @@
 package com.bookstore.Trabalho.Programacao3.controller.impl;
 
 import com.bookstore.Trabalho.Programacao3.controller.UserController;
-import com.bookstore.Trabalho.Programacao3.dto.UserDTO;
+import com.bookstore.Trabalho.Programacao3.dto.user.UserDTO;
 import com.bookstore.Trabalho.Programacao3.service.impl.UserServiceImpl;
 import io.swagger.annotations.Api;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

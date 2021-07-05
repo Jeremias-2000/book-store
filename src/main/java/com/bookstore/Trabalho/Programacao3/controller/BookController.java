@@ -2,7 +2,6 @@ package com.bookstore.Trabalho.Programacao3.controller;
 
 
 import com.bookstore.Trabalho.Programacao3.dto.BookDTO;
-import com.bookstore.Trabalho.Programacao3.dto.UserDTO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

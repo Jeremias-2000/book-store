@@ -30,4 +30,6 @@ public class Book {
     private Date launchData;
     @NotEmpty
     private String price;
+
+    private int quantity;
 }

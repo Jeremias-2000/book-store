@@ -13,6 +13,7 @@ public class BookMapper {
                 .description(bookDTO.getDescription())
                 .author(bookDTO.getAuthor())
                 .launchData(bookDTO.getLaunchData())
+                .quantity(bookDTO.getQuantity())
                 .build();
     }
 
@@ -23,6 +24,7 @@ public class BookMapper {
                 .description(book.getDescription())
                 .author(book.getAuthor())
                 .launchData(book.getLaunchData())
+                .quantity(book.getQuantity())
                 .build();
     }
 }

@@ -2,14 +2,13 @@ package com.bookstore.Trabalho.Programacao3.service.impl;
 
 
 import com.bookstore.Trabalho.Programacao3.document.User;
-import com.bookstore.Trabalho.Programacao3.dto.UserDTO;
+import com.bookstore.Trabalho.Programacao3.dto.user.UserDTO;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionByNullUser;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionPerExistingUser;
 import com.bookstore.Trabalho.Programacao3.exception.UserNotFoundException;
 import com.bookstore.Trabalho.Programacao3.mapper.UserMapper;
 import com.bookstore.Trabalho.Programacao3.repository.UserRepository;
 import com.bookstore.Trabalho.Programacao3.service.AbstractUserService;
-import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
