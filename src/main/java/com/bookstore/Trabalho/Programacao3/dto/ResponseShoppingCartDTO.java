@@ -1,28 +1,20 @@
-package com.bookstore.Trabalho.Programacao3.document;
+package com.bookstore.Trabalho.Programacao3.dto;
 
-import com.bookstore.Trabalho.Programacao3.dto.BookDTO;
+import com.bookstore.Trabalho.Programacao3.document.Book;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShoppingCart {
+public class ResponseShoppingCartDTO {
 
-    @Id
     private String cartId;
     private String userId;
     private List<Book> books;
-
-
-
-
 }

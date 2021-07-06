@@ -16,9 +16,13 @@ public interface BookController {
     @ApiOperation(value = "retorna  livro específico")
     ResponseEntity<?> findBookById(@PathVariable("bookId") String bookId);
 
+    @GetMapping("/find/name/{name}")
+    @ApiOperation(value = "Retorna pesquisa de livros")
+    ResponseEntity<?> findBookByName(@PathVariable("name") String name);
+
     @PostMapping("/save")
     @ApiOperation(value = "salva um livro")
-    ResponseEntity<?> creteBook(@RequestBody BookDTO dto);
+    ResponseEntity<?> createBook(@RequestBody BookDTO dto);
 
     @PutMapping("/update/id/{bookId}")
     @ApiOperation(value = "atualiza um livro")

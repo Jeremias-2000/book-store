@@ -2,6 +2,7 @@ package com.bookstore.Trabalho.Programacao3.service.impl;
 
 
 import com.bookstore.Trabalho.Programacao3.document.User;
+import com.bookstore.Trabalho.Programacao3.dto.user.ShoppingCartDTO;
 import com.bookstore.Trabalho.Programacao3.dto.user.UserDTO;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionByNullUser;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionPerExistingUser;
@@ -10,6 +11,7 @@ import com.bookstore.Trabalho.Programacao3.mapper.UserMapper;
 import com.bookstore.Trabalho.Programacao3.repository.UserRepository;
 import com.bookstore.Trabalho.Programacao3.service.AbstractUserService;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +23,12 @@ import static java.util.Optional.*;
 
 
 @Service
-
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserServiceImpl implements AbstractUserService<UserDTO> {
 
-    @Autowired
+
     private UserRepository userRepository;
+    private CartServiceImpl cartService;
 
     @Override
     public List<UserDTO> findUsers() {
@@ -36,7 +39,8 @@ public class UserServiceImpl implements AbstractUserService<UserDTO> {
 
 
     public List<UserDTO> convertToListUserDTO(List<User> users) {
-        return users.stream().map(UserDTO::new).collect(Collectors.toList());
+        return users.stream().map(UserDTO::new)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -52,6 +56,12 @@ public class UserServiceImpl implements AbstractUserService<UserDTO> {
         checkIfUserIsNotNull(ofNullable(user));
         checkIfUserAlreadyExists(user);
         userRepository.save(UserMapper.mapToModel(user));
+
+
+        ShoppingCartDTO cartDTO = new ShoppingCartDTO();
+        cartDTO.setUserId(user.getUserId());
+        cartService.createShoppingCart(cartDTO);
+
         return user ;
     }
 

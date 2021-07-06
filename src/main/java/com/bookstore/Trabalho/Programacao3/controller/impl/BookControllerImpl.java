@@ -7,6 +7,7 @@ import com.bookstore.Trabalho.Programacao3.service.impl.BookServiceImpl;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,21 +29,27 @@ public class BookControllerImpl implements BookController {
 
     @Override
     public ResponseEntity<?> findBookById(String bookId) {
-        return null;
+        return ResponseEntity.ok(bookService.findBookById(bookId));
     }
 
     @Override
-    public ResponseEntity<?> creteBook(BookDTO dto) {
-        return null;
+    public ResponseEntity<?> findBookByName(String name) {
+        return ResponseEntity.ok(bookService.findBookByName(name));
+    }
+
+    @Override
+    public ResponseEntity<?> createBook(BookDTO dto) {
+        return new ResponseEntity<>(bookService.createBook(dto), HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<?> updateBook(String bookId, BookDTO dto) {
-        return null;
+        return ResponseEntity.ok(bookService.updateBook(bookId, dto));
     }
 
     @Override
     public ResponseEntity<?> deleteBook(String bookId) {
-        return null;
+        bookService.deleteBook(bookId);
+        return ResponseEntity.ok().build();
     }
 }
