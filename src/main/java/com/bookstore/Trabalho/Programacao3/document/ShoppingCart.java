@@ -1,6 +1,5 @@
 package com.bookstore.Trabalho.Programacao3.document;
 
-import com.bookstore.Trabalho.Programacao3.dto.BookDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

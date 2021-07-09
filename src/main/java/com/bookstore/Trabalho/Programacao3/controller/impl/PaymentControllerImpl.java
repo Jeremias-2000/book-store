@@ -1,7 +1,7 @@
 package com.bookstore.Trabalho.Programacao3.controller.impl;
 
 import com.bookstore.Trabalho.Programacao3.controller.PaymentController;
-import com.bookstore.Trabalho.Programacao3.dto.payment.RequestPaymentDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.RequestPaymentRequest;
 import com.bookstore.Trabalho.Programacao3.service.impl.PaymentServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,8 @@ public class PaymentControllerImpl implements PaymentController {
     }
 
     @Override
-    public ResponseEntity<?> makePayment(RequestPaymentDTO requestPaymentDTO) {
-        return new ResponseEntity<>(paymentService.createPayment(requestPaymentDTO), HttpStatus.CREATED);
+    public ResponseEntity<?> makePayment(RequestPaymentRequest requestPaymentRequest) {
+        return new ResponseEntity<>(paymentService.createPayment(requestPaymentRequest), HttpStatus.CREATED);
     }
 
     @Override

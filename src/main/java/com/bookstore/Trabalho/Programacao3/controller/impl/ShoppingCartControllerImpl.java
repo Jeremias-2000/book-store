@@ -1,15 +1,12 @@
 package com.bookstore.Trabalho.Programacao3.controller.impl;
 
 import com.bookstore.Trabalho.Programacao3.controller.CartController;
-import com.bookstore.Trabalho.Programacao3.dto.RequestShoppingCartDTO;
-import com.bookstore.Trabalho.Programacao3.dto.user.ShoppingCartDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartRequest;
 import com.bookstore.Trabalho.Programacao3.service.impl.CartServiceImpl;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +36,7 @@ public class ShoppingCartControllerImpl implements CartController {
     }
 
     @Override
-    public ResponseEntity<?> addBook(String cartId, RequestShoppingCartDTO dto) {
+    public ResponseEntity<?> addBook(String cartId, ShoppingCartRequest dto) {
         return ResponseEntity.ok(cartService.addBookInShoppingCart(cartId, dto));
     }
 

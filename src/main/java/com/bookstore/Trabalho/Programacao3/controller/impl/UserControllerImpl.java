@@ -1,7 +1,7 @@
 package com.bookstore.Trabalho.Programacao3.controller.impl;
 
 import com.bookstore.Trabalho.Programacao3.controller.UserController;
-import com.bookstore.Trabalho.Programacao3.dto.user.UserDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
 import com.bookstore.Trabalho.Programacao3.service.impl.UserServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +31,12 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity<?> creteUser(UserDTO dto) {
+    public ResponseEntity<?> creteUser(UserRequest dto) {
         return new ResponseEntity<>(userService.createNewUser(dto), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<?> updateUser(String userId, UserDTO dto) {
+    public ResponseEntity<?> updateUser(String userId, UserRequest dto) {
         return ResponseEntity.ok(userService.updateUserById(userId, dto));
     }
 

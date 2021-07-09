@@ -1,12 +1,12 @@
 package com.bookstore.Trabalho.Programacao3.mapper;
 
 import com.bookstore.Trabalho.Programacao3.document.payment.Payment;
-import com.bookstore.Trabalho.Programacao3.dto.payment.ResponsePaymentDTO;
+import com.bookstore.Trabalho.Programacao3.dto.response.PaymentResponse;
 
 public class ResponsePaymentMapper {
 
-    public static ResponsePaymentDTO mapResponse(Payment payment){
-        return ResponsePaymentDTO
+    public static PaymentResponse mapResponse(Payment payment){
+        return PaymentResponse
                 .builder()
                 .paymentId(payment.getPaymentId())
                 .price(payment.getPrice())

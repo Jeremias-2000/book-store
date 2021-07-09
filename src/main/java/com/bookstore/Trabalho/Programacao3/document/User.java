@@ -27,27 +27,11 @@ public class User {
     @Id
     private String userId;
 
-    @Size(max = 200)
     private String  userName;
-
-    @NotBlank
     private Date birthDay;
-
-    @NotBlank
-    @Size(min = 8)
     private String password;
-
-    @NotBlank
-    @Email(message = "invalid email")
     private String email;
-
-    @NotBlank
-    @CPF(message = "invalid cpf")
     private String cpf;
-
-
     private CreditCard creditCard;
-
-    @NotBlank
     private Address address;
 }

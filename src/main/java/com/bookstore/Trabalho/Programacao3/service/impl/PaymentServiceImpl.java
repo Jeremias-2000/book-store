@@ -3,10 +3,10 @@ package com.bookstore.Trabalho.Programacao3.service.impl;
 
 import com.bookstore.Trabalho.Programacao3.document.payment.Payment;
 import com.bookstore.Trabalho.Programacao3.document.payment.PaymentSlip;
-import com.bookstore.Trabalho.Programacao3.dto.user.UserDTO;
-import com.bookstore.Trabalho.Programacao3.dto.payment.PaymentDTO;
-import com.bookstore.Trabalho.Programacao3.dto.payment.RequestPaymentDTO;
-import com.bookstore.Trabalho.Programacao3.dto.payment.ResponsePaymentDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
+import com.bookstore.Trabalho.Programacao3.dto.request.PaymentRequest;
+import com.bookstore.Trabalho.Programacao3.dto.request.RequestPaymentRequest;
+import com.bookstore.Trabalho.Programacao3.dto.response.PaymentResponse;
 import com.bookstore.Trabalho.Programacao3.enums.PaymentMethods;
 import com.bookstore.Trabalho.Programacao3.enums.Status;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionForPaymentNotFound;
@@ -37,7 +37,7 @@ public class PaymentServiceImpl implements AbstractPaymentService{
 
 
     @Override
-    public PaymentDTO findPaymentById(String paymentId) {
+    public PaymentRequest findPaymentById(String paymentId) {
         return paymentRepository.findById(paymentId)
                 .map(PaymentMapper::mapToDTO)
                 .orElseThrow(() ->
@@ -45,18 +45,18 @@ public class PaymentServiceImpl implements AbstractPaymentService{
     }
 
     @Override
-    public ResponsePaymentDTO createPayment(RequestPaymentDTO requestPaymentDTO) {
+    public PaymentResponse createPayment(RequestPaymentRequest requestPaymentRequest) {
         Payment responsePayment = new Payment();
-        ResponsePaymentDTO responsePaymentDTO = new ResponsePaymentDTO();
+        PaymentResponse paymentResponse = new PaymentResponse();
 
-        Payment payment = conversionService.convert(requestPaymentDTO.getPayment(),Payment.class);
-        UserDTO userDTO = userService.findUserById(requestPaymentDTO.getUserId());
+        Payment payment = conversionService.convert(requestPaymentRequest.getPayment(),Payment.class);
+        UserRequest userRequest = userService.findUserById(requestPaymentRequest.getUserId());
 
 
-        payment.setUserId(userDTO.getUserId());
+        payment.setUserId(userRequest.getUserId());
 
         if (PaymentMethods.CREDIT_CARD.equals(payment.getPaymentMethod())){
-            payment.setCreditCard(userDTO.getCreditCard());
+            payment.setCreditCard(userRequest.getCreditCard());
             payment.setStatus(Status.SENT);
 
         }else if(PaymentMethods.TICKET.equals(payment.getPaymentMethod())){
@@ -71,14 +71,14 @@ public class PaymentServiceImpl implements AbstractPaymentService{
         payment.setRegistrationDate(LocalDate.now());
 
         Payment pay =  paymentRepository.save(payment);
-        responsePaymentDTO = ResponsePaymentMapper.mapResponse(pay);
+        paymentResponse = ResponsePaymentMapper.mapResponse(pay);
 
 
         if (PaymentMethods.TICKET.equals(payment.getPaymentSlip().getNumber())){
-            responsePaymentDTO.setTicketNumber(payment.getPaymentSlip().getNumber());
+            paymentResponse.setTicketNumber(payment.getPaymentSlip().getNumber());
         }
 
-        return responsePaymentDTO;
+        return paymentResponse;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class PaymentServiceImpl implements AbstractPaymentService{
     }
 
     @Override
-    public void checkIfPaymentIsNotNull(Optional<RequestPaymentDTO> dto) {
+    public void checkIfPaymentIsNotNull(Optional<RequestPaymentRequest> dto) {
 
     }
 }

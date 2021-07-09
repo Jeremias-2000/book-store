@@ -1,7 +1,7 @@
 package com.bookstore.Trabalho.Programacao3.service.impl;
 
 import com.bookstore.Trabalho.Programacao3.document.payment.PaymentSlip;
-import com.bookstore.Trabalho.Programacao3.dto.payment.PaymentSlipDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.PaymentSlipRequest;
 import com.bookstore.Trabalho.Programacao3.mapper.PaymentSlipMapper;
 import com.bookstore.Trabalho.Programacao3.repository.PaymentSlipRepository;
 import com.bookstore.Trabalho.Programacao3.service.AbstractPaymentSlipService;
@@ -19,7 +19,7 @@ public class PaymentSlipServiceImpl implements AbstractPaymentSlipService<Paymen
     private PaymentSlipRepository paymentSlipRepository;
 
     @Override
-    public PaymentSlipDTO savePaymentSlip(PaymentSlipDTO paymentSlip) {
+    public PaymentSlipRequest savePaymentSlip(PaymentSlipRequest paymentSlip) {
         paymentSlipRepository.save(PaymentSlipMapper.mapToModel(paymentSlip));
         return paymentSlip;
     }

@@ -1,22 +1,22 @@
 package com.bookstore.Trabalho.Programacao3.service;
 
 import com.bookstore.Trabalho.Programacao3.document.Book;
-import com.bookstore.Trabalho.Programacao3.dto.RequestShoppingCartDTO;
-import com.bookstore.Trabalho.Programacao3.dto.ResponseShoppingCartDTO;
-import com.bookstore.Trabalho.Programacao3.dto.user.ShoppingCartDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartRequest;
+import com.bookstore.Trabalho.Programacao3.dto.response.ShoppingCartResponse;
+import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartOperationRequest;
 
 import java.util.List;
 
 public interface AbstractCartService {
 
-   List<ShoppingCartDTO> findShoppingCarts ();
-   ShoppingCartDTO findCartById(String cartId);
-   ResponseShoppingCartDTO addBookInShoppingCart(String cartId, RequestShoppingCartDTO dto);
-   ShoppingCartDTO removeBookInShoppingCart(String cartId, int positionNumber);
+   List<ShoppingCartOperationRequest> findShoppingCarts ();
+   ShoppingCartOperationRequest findCartById(String cartId);
+   ShoppingCartResponse addBookInShoppingCart(String cartId, ShoppingCartRequest dto);
+   ShoppingCartOperationRequest removeBookInShoppingCart(String cartId, int positionNumber);
    void deleteShoppingCartById(String cartId);
 
    void checkIfThePositionIsValid(List<Book> books, int position);
-   ShoppingCartDTO createShoppingCart(ShoppingCartDTO cartDTO);
+   ShoppingCartOperationRequest createShoppingCart(ShoppingCartOperationRequest cartDTO);
 
-   void checkIfTheShoppingCartIsNull(ShoppingCartDTO dto);
+   void checkIfTheShoppingCartIsNull(ShoppingCartOperationRequest dto);
 }

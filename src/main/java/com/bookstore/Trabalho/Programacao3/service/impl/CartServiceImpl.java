@@ -1,9 +1,9 @@
 package com.bookstore.Trabalho.Programacao3.service.impl;
 
 import com.bookstore.Trabalho.Programacao3.document.Book;
-import com.bookstore.Trabalho.Programacao3.dto.RequestShoppingCartDTO;
-import com.bookstore.Trabalho.Programacao3.dto.ResponseShoppingCartDTO;
-import com.bookstore.Trabalho.Programacao3.dto.user.ShoppingCartDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartRequest;
+import com.bookstore.Trabalho.Programacao3.dto.response.ShoppingCartResponse;
+import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartOperationRequest;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionForNullShoppingCart;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionForShoppingCartNotFound;
 import com.bookstore.Trabalho.Programacao3.mapper.BookMapper;
@@ -28,30 +28,30 @@ public class CartServiceImpl implements AbstractCartService {
 
 
     @Override
-    public List<ShoppingCartDTO> findShoppingCarts() {
+    public List<ShoppingCartOperationRequest> findShoppingCarts() {
         return cartRepository.findAll().stream()
                 .map(ShoppingCartMapper::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public ShoppingCartDTO findCartById(String cartId) {
+    public ShoppingCartOperationRequest findCartById(String cartId) {
         return cartRepository.findById(cartId).map(ShoppingCartMapper::mapToDTO).orElseThrow(() ->
                 new ExceptionForShoppingCartNotFound("shopping cart does not exists: " + cartId));
     }
 
     @Override
-    public ShoppingCartDTO createShoppingCart(ShoppingCartDTO cartDTO) {
+    public ShoppingCartOperationRequest createShoppingCart(ShoppingCartOperationRequest cartDTO) {
         checkIfTheShoppingCartIsNull(cartDTO);
          cartRepository.save(ShoppingCartMapper.mapToModel(cartDTO));
          return cartDTO;
     }
 
     @Override
-    public ResponseShoppingCartDTO addBookInShoppingCart(String cartId, RequestShoppingCartDTO dto) {
-        ShoppingCartDTO search = findCartById(cartId);
-        ResponseShoppingCartDTO response = new ResponseShoppingCartDTO();
-        Book book = BookMapper.mapToModel(dto.getBookDTO());
+    public ShoppingCartResponse addBookInShoppingCart(String cartId, ShoppingCartRequest dto) {
+        ShoppingCartOperationRequest search = findCartById(cartId);
+        ShoppingCartResponse response = new ShoppingCartResponse();
+        Book book = BookMapper.mapToModel(dto.getBookRequest());
 
         search.add(book);
 
@@ -62,8 +62,8 @@ public class CartServiceImpl implements AbstractCartService {
     }
 
     @Override
-    public ShoppingCartDTO removeBookInShoppingCart(String cartId, int position) {
-        ShoppingCartDTO search = findCartById(cartId);
+    public ShoppingCartOperationRequest removeBookInShoppingCart(String cartId, int position) {
+        ShoppingCartOperationRequest search = findCartById(cartId);
 
         checkIfThePositionIsValid(search.getBooks(),position);
         search.remove(position);
@@ -73,7 +73,7 @@ public class CartServiceImpl implements AbstractCartService {
 
     @Override
     public void deleteShoppingCartById(String cartId) {
-        ShoppingCartDTO cartDTO = findCartById(cartId);
+        ShoppingCartOperationRequest cartDTO = findCartById(cartId);
         cartRepository.delete(ShoppingCartMapper.mapToModel(cartDTO));
     }
 
@@ -86,7 +86,7 @@ public class CartServiceImpl implements AbstractCartService {
     }
 
     @Override
-    public void checkIfTheShoppingCartIsNull(ShoppingCartDTO dto) {
+    public void checkIfTheShoppingCartIsNull(ShoppingCartOperationRequest dto) {
         if (!dto.equals(null)){
             throw new ExceptionForNullShoppingCart("the shopping cart is null " + dto);
         }

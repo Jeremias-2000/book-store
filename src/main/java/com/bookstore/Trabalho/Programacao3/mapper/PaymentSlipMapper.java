@@ -1,22 +1,22 @@
 package com.bookstore.Trabalho.Programacao3.mapper;
 
 import com.bookstore.Trabalho.Programacao3.document.payment.PaymentSlip;
-import com.bookstore.Trabalho.Programacao3.dto.payment.PaymentSlipDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.PaymentSlipRequest;
 
 public class PaymentSlipMapper {
 
-    public static PaymentSlip mapToModel(PaymentSlipDTO paymentSlipDTO){
+    public static PaymentSlip mapToModel(PaymentSlipRequest paymentSlipRequest){
         return PaymentSlip.builder()
-                .paymentId(paymentSlipDTO.getPaymentId())
-                .userId(paymentSlipDTO.getUserId())
-                .number(paymentSlipDTO.getNumber())
-                .dueDate(paymentSlipDTO.getDueDate())
+                .paymentId(paymentSlipRequest.getPaymentId())
+                .userId(paymentSlipRequest.getUserId())
+                .number(paymentSlipRequest.getNumber())
+                .dueDate(paymentSlipRequest.getDueDate())
                 .build();
     }
 
 
-    public static PaymentSlipDTO mapToDTO(PaymentSlip paymentSlip){
-        return PaymentSlipDTO.builder()
+    public static PaymentSlipRequest mapToDTO(PaymentSlip paymentSlip){
+        return PaymentSlipRequest.builder()
                 .paymentId(paymentSlip.getPaymentId())
                 .userId(paymentSlip.getUserId())
                 .number(paymentSlip.getNumber())

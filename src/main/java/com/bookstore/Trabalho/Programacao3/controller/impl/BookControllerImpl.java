@@ -2,10 +2,9 @@ package com.bookstore.Trabalho.Programacao3.controller.impl;
 
 
 import com.bookstore.Trabalho.Programacao3.controller.BookController;
-import com.bookstore.Trabalho.Programacao3.dto.BookDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.BookRequest;
 import com.bookstore.Trabalho.Programacao3.service.impl.BookServiceImpl;
 import io.swagger.annotations.Api;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,12 +37,12 @@ public class BookControllerImpl implements BookController {
     }
 
     @Override
-    public ResponseEntity<?> createBook(BookDTO dto) {
+    public ResponseEntity<?> createBook(BookRequest dto) {
         return new ResponseEntity<>(bookService.createBook(dto), HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<?> updateBook(String bookId, BookDTO dto) {
+    public ResponseEntity<?> updateBook(String bookId, BookRequest dto) {
         return ResponseEntity.ok(bookService.updateBook(bookId, dto));
     }
 

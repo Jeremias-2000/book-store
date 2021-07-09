@@ -1,15 +1,12 @@
 package com.bookstore.Trabalho.Programacao3.mapper;
 
 import com.bookstore.Trabalho.Programacao3.document.payment.Payment;
-import com.bookstore.Trabalho.Programacao3.dto.payment.PaymentDTO;
-import com.bookstore.Trabalho.Programacao3.dto.payment.ResponsePaymentDTO;
-import com.bookstore.Trabalho.Programacao3.enums.PaymentMethods;
+import com.bookstore.Trabalho.Programacao3.dto.request.PaymentRequest;
 import com.bookstore.Trabalho.Programacao3.exception.NullPaymentException;
-import org.springframework.util.ObjectUtils;
 
 public class PaymentMapper {
 
-    public static Payment mapToModel(PaymentDTO dto){
+    public static Payment mapToModel(PaymentRequest dto){
 
             if (dto.equals(null)){
                 throw  new NullPaymentException("payment information is null" + dto);
@@ -24,8 +21,8 @@ public class PaymentMapper {
                     .build();
     }
 
-    public static PaymentDTO mapToDTO(Payment payment){
-        return PaymentDTO.builder()
+    public static PaymentRequest mapToDTO(Payment payment){
+        return PaymentRequest.builder()
                 .paymentId(payment.getPaymentId())
                 .price(payment.getPrice())
                 .registrationDate(payment.getRegistrationDate())

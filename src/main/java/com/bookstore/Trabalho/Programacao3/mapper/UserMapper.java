@@ -2,11 +2,11 @@ package com.bookstore.Trabalho.Programacao3.mapper;
 
 import com.bookstore.Trabalho.Programacao3.document.User;
 
-import com.bookstore.Trabalho.Programacao3.dto.user.UserDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
 
 public class UserMapper {
 
-    public static User mapToModel(UserDTO dto){
+    public static User mapToModel(UserRequest dto){
         return User.builder()
                 .userId(dto.getUserId())
                 .userName(dto.getUserName())
@@ -19,8 +19,8 @@ public class UserMapper {
     }
 
 
-    public static UserDTO mapToDTO(User user){
-        return UserDTO.builder().
+    public static UserRequest mapToDTO(User user){
+        return UserRequest.builder().
                 userId(user.getUserId())
                 .userName(user.getUserName())
                 .birthDay(user.getBirthDay())

@@ -2,8 +2,8 @@ package com.bookstore.Trabalho.Programacao3.service.impl;
 
 
 import com.bookstore.Trabalho.Programacao3.document.User;
-import com.bookstore.Trabalho.Programacao3.dto.user.ShoppingCartDTO;
-import com.bookstore.Trabalho.Programacao3.dto.user.UserDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartOperationRequest;
+import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionByNullUser;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionPerExistingUser;
 import com.bookstore.Trabalho.Programacao3.exception.UserNotFoundException;
@@ -24,27 +24,27 @@ import static java.util.Optional.*;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class UserServiceImpl implements AbstractUserService<UserDTO> {
+public class UserServiceImpl implements AbstractUserService<UserRequest> {
 
 
     private UserRepository userRepository;
     private CartServiceImpl cartService;
 
     @Override
-    public List<UserDTO> findUsers() {
+    public List<UserRequest> findUsers() {
         return userRepository.findAll()
                 .stream().map(UserMapper::mapToDTO)
                 .collect(Collectors.toList());
     }
 
 
-    public List<UserDTO> convertToListUserDTO(List<User> users) {
-        return users.stream().map(UserDTO::new)
+    public List<UserRequest> convertToListUserDTO(List<User> users) {
+        return users.stream().map(UserRequest::new)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public UserDTO findUserById(String userId) {
+    public UserRequest findUserById(String userId) {
         return userRepository.findById(userId)
                 .map(UserMapper::mapToDTO)
                 .orElseThrow(() ->
@@ -52,13 +52,13 @@ public class UserServiceImpl implements AbstractUserService<UserDTO> {
     }
 
     @Override
-    public UserDTO createNewUser(UserDTO user) {
+    public UserRequest createNewUser(UserRequest user) {
         checkIfUserIsNotNull(ofNullable(user));
         checkIfUserAlreadyExists(user);
         userRepository.save(UserMapper.mapToModel(user));
 
 
-        ShoppingCartDTO cartDTO = new ShoppingCartDTO();
+        ShoppingCartOperationRequest cartDTO = new ShoppingCartOperationRequest();
         cartDTO.setUserId(user.getUserId());
         cartService.createShoppingCart(cartDTO);
 
@@ -66,7 +66,7 @@ public class UserServiceImpl implements AbstractUserService<UserDTO> {
     }
 
     @Override
-    public UserDTO updateUserById(String userId, UserDTO dto) {
+    public UserRequest updateUserById(String userId, UserRequest dto) {
         userRepository.findById(userId)
                 .map(user -> UserMapper.mapToModel(dto));
 
@@ -75,19 +75,19 @@ public class UserServiceImpl implements AbstractUserService<UserDTO> {
 
     @Override
     public void deleteUserById(String userId) {
-        UserDTO dto = findUserById(userId);
+        UserRequest dto = findUserById(userId);
         userRepository.delete(UserMapper.mapToModel(dto));
     }
 
     @Override
-    public void checkIfUserAlreadyExists(UserDTO dto) {
+    public void checkIfUserAlreadyExists(UserRequest dto) {
         if (dto.getUserName().equals(userRepository.findUserByUserName(dto.getUserName()))){
             throw new ExceptionPerExistingUser("the  user already exists" + dto);
         }
     }
 
     @Override
-    public void checkIfUserIsNotNull(Optional<UserDTO> dto) {
+    public void checkIfUserIsNotNull(Optional<UserRequest> dto) {
             if (!dto.isPresent()){
                 throw  new ExceptionByNullUser("the user is null " +  dto);
             }

@@ -1,6 +1,6 @@
 package com.bookstore.Trabalho.Programacao3.controller;
 
-import com.bookstore.Trabalho.Programacao3.dto.payment.RequestPaymentDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.RequestPaymentRequest;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ public interface PaymentController {
 
     @PostMapping("/save")
     @ApiOperation(value = "Realiza um pagamento ")
-    ResponseEntity<?> makePayment(@RequestBody RequestPaymentDTO requestPaymentDTO);
+    ResponseEntity<?> makePayment(@RequestBody RequestPaymentRequest requestPaymentRequest);
 
     @DeleteMapping("/delete/id/{paymentId}")
     @ApiOperation(value = "Deleta um pagamento ")

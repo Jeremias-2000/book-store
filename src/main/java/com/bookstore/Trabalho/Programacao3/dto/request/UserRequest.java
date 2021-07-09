@@ -1,4 +1,4 @@
-package com.bookstore.Trabalho.Programacao3.dto.user;
+package com.bookstore.Trabalho.Programacao3.dto.request;
 
 
 import com.bookstore.Trabalho.Programacao3.document.Address;
@@ -10,20 +10,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class UserRequest {
 
     private String userId;
 
+    @NotEmpty
+    @NotNull
     @Size(max = 200)
     private String  userName;
 
@@ -31,14 +30,17 @@ public class UserDTO {
     private Date birthDay;
 
     @NotBlank
+    @NotEmpty
     @Size(min = 8)
     private String password;
 
     @NotBlank
+    @NotEmpty
     @Email(message = "invalid email")
     private String email;
 
     @NotBlank
+    @NotEmpty
     @CPF(message = "invalid cpf")
     private String cpf;
 
@@ -47,7 +49,7 @@ public class UserDTO {
     @NotBlank
     private Address address;
 
-    public UserDTO(User user) {
+    public UserRequest(User user) {
         this.userId = user.getUserId();
         this.userName = user.getUserName();
         this.birthDay = user.getBirthDay();

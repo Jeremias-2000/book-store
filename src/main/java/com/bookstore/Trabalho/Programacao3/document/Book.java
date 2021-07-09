@@ -1,6 +1,7 @@
 package com.bookstore.Trabalho.Programacao3.document;
 
 
+import com.bookstore.Trabalho.Programacao3.enums.BookGenre;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,16 +21,11 @@ public class Book {
 
     @Id
     private String bookId;
-    @NotEmpty
     private String name;
-    @NotEmpty
     private String description;
-    @NotEmpty
+    private BookGenre genre;
     private String author;
-    @NotEmpty
     private Date launchData;
-    @NotEmpty
     private String price;
-
     private int quantity;
 }

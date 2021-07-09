@@ -1,4 +1,4 @@
-package com.bookstore.Trabalho.Programacao3.dto.user;
+package com.bookstore.Trabalho.Programacao3.dto.request;
 
 import com.bookstore.Trabalho.Programacao3.enums.FlagType;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 @Builder
 @AllArgsConstructor
-public class CreditCardDTO {
+public class CreditCardRequest {
 
     private String cardName;
     private String number;

@@ -1,7 +1,7 @@
 package com.bookstore.Trabalho.Programacao3.service;
 
 
-import com.bookstore.Trabalho.Programacao3.dto.user.UserDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,10 +12,10 @@ public interface AbstractUserService<U> {
 
     U findUserById(String userId);
     U createNewUser(U user);
-    U updateUserById(String userId, UserDTO dto);
+    U updateUserById(String userId, UserRequest dto);
 
     void deleteUserById(String userId);
 
-    void checkIfUserAlreadyExists(UserDTO dto);
-    void checkIfUserIsNotNull(Optional<UserDTO> dto);
+    void checkIfUserAlreadyExists(UserRequest dto);
+    void checkIfUserIsNotNull(Optional<UserRequest> dto);
 }

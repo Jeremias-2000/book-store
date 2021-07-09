@@ -2,26 +2,28 @@ package com.bookstore.Trabalho.Programacao3.mapper;
 
 
 import com.bookstore.Trabalho.Programacao3.document.Book;
-import com.bookstore.Trabalho.Programacao3.dto.BookDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.BookRequest;
 
 public class BookMapper {
 
-    public static  Book mapToModel(BookDTO bookDTO){
+    public static  Book mapToModel(BookRequest bookRequest){
         return Book.builder()
-                .bookId(bookDTO.getBookId())
-                .name(bookDTO.getName())
-                .description(bookDTO.getDescription())
-                .author(bookDTO.getAuthor())
-                .launchData(bookDTO.getLaunchData())
-                .quantity(bookDTO.getQuantity())
+                .bookId(bookRequest.getBookId())
+                .name(bookRequest.getName())
+                .description(bookRequest.getDescription())
+                .genre(bookRequest.getGenre())
+                .author(bookRequest.getAuthor())
+                .launchData(bookRequest.getLaunchData())
+                .quantity(bookRequest.getQuantity())
                 .build();
     }
 
-    public static  BookDTO mapToDTO(Book book){
-        return BookDTO.builder()
+    public static BookRequest mapToDTO(Book book){
+        return BookRequest.builder()
                 .bookId(book.getBookId())
                 .name(book.getName())
                 .description(book.getDescription())
+                .genre(book.getGenre())
                 .author(book.getAuthor())
                 .launchData(book.getLaunchData())
                 .quantity(book.getQuantity())

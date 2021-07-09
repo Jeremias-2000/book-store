@@ -1,11 +1,11 @@
 package com.bookstore.Trabalho.Programacao3.mapper;
 
 import com.bookstore.Trabalho.Programacao3.document.payment.CreditCard;
-import com.bookstore.Trabalho.Programacao3.dto.user.CreditCardDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.CreditCardRequest;
 
 public class CreditCardMapper {
 
-    public static CreditCard mapToModel(CreditCardDTO dto){
+    public static CreditCard mapToModel(CreditCardRequest dto){
         return CreditCard.builder()
                 .cardName(dto.getCardName())
                 .number(dto.getNumber())

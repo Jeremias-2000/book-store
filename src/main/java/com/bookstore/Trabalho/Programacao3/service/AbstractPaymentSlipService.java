@@ -1,11 +1,10 @@
 package com.bookstore.Trabalho.Programacao3.service;
 
-import com.bookstore.Trabalho.Programacao3.document.payment.PaymentSlip;
-import com.bookstore.Trabalho.Programacao3.dto.payment.PaymentSlipDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.PaymentSlipRequest;
 
 public interface AbstractPaymentSlipService<PS> {
 
-    PaymentSlipDTO savePaymentSlip(PaymentSlipDTO paymentSlip);
+    PaymentSlipRequest savePaymentSlip(PaymentSlipRequest paymentSlip);
     PS generatePaymentSlip();
 
 }
