@@ -5,6 +5,7 @@ import com.bookstore.Trabalho.Programacao3.document.User;
 import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartOperationRequest;
 import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionByNullUser;
+import com.bookstore.Trabalho.Programacao3.exception.ExceptionForEmailNotFound;
 import com.bookstore.Trabalho.Programacao3.exception.ExceptionPerExistingUser;
 import com.bookstore.Trabalho.Programacao3.exception.UserNotFoundException;
 import com.bookstore.Trabalho.Programacao3.mapper.UserMapper;
@@ -49,6 +50,17 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
                 .map(UserMapper::mapToDTO)
                 .orElseThrow(() ->
                         new UserNotFoundException("id does not exists" + userId));
+    }
+
+    @Override
+    public UserRequest findUserByEmail(String email) {
+        UserRequest request = UserMapper.mapToDTO( userRepository.findUserByEmail(email));
+        if (!request.equals(null)){
+            return request;
+        }else {
+            throw new ExceptionForEmailNotFound("Email does not exists in database " + email );
+        }
+
     }
 
     @Override

@@ -11,6 +11,7 @@ public interface AbstractUserService<U> {
     List<U> findUsers();
 
     U findUserById(String userId);
+    U findUserByEmail(String email);
     U createNewUser(U user);
     U updateUserById(String userId, UserRequest dto);
 
