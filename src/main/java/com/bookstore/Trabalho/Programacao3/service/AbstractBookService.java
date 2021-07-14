@@ -5,7 +5,7 @@ import com.bookstore.Trabalho.Programacao3.dto.request.BookRequest;
 import java.util.List;
 import java.util.Optional;
 
-public interface BookService<B> {
+public interface AbstractBookService<B> {
 
     List<B> findBooks();
     B findBookById(String bookId);

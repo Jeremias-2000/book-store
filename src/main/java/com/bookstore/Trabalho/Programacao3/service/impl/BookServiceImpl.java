@@ -8,7 +8,7 @@ import com.bookstore.Trabalho.Programacao3.exception.ExceptionByNullBook;
 import com.bookstore.Trabalho.Programacao3.mapper.BookMapper;
 
 import com.bookstore.Trabalho.Programacao3.repository.BookRepository;
-import com.bookstore.Trabalho.Programacao3.service.BookService;
+import com.bookstore.Trabalho.Programacao3.service.AbstractBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import static java.util.Optional.*;
 
 @Service
-public class BookServiceImpl implements BookService<BookRequest> {
+public class BookServiceImpl implements AbstractBookService<BookRequest> {
 
     @Autowired
     private BookRepository bookRepository;

@@ -39,10 +39,7 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
     }
 
 
-    public List<UserRequest> convertToListUserDTO(List<User> users) {
-        return users.stream().map(UserRequest::new)
-                .collect(Collectors.toList());
-    }
+
 
     @Override
     public UserRequest findUserById(String userId) {
