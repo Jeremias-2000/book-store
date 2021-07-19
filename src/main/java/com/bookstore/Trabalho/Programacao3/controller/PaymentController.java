@@ -11,9 +11,9 @@ public interface PaymentController {
     @ApiOperation(value = "Retorna um pagamento ")
     ResponseEntity<?> findPayment(@PathVariable("paymentId") String paymentId);
 
-    @PostMapping("/save")
+    /*@PostMapping("/save")
     @ApiOperation(value = "Realiza um pagamento ")
-    ResponseEntity<?> makePayment(@RequestBody RequestPaymentRequest requestPaymentRequest);
+    ResponseEntity<?> makePayment(@RequestBody RequestPaymentRequest requestPaymentRequest);*/
 
     @DeleteMapping("/delete/id/{paymentId}")
     @ApiOperation(value = "Deleta um pagamento ")

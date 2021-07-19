@@ -44,7 +44,7 @@ public class PaymentServiceImpl implements AbstractPaymentService{
                         new ExceptionForPaymentNotFound("payment does not exists : " + paymentId));
     }
 
-    @Override
+  /*  @Override
     public PaymentResponse createPayment(RequestPaymentRequest requestPaymentRequest) {
         Payment responsePayment = new Payment();
         PaymentResponse paymentResponse = new PaymentResponse();
@@ -79,7 +79,7 @@ public class PaymentServiceImpl implements AbstractPaymentService{
         }
 
         return paymentResponse;
-    }
+    }*/
 
     @Override
     public void deletePaymentById(String paymentId) {

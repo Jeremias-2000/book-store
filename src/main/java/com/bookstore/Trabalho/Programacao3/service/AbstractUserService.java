@@ -1,6 +1,7 @@
 package com.bookstore.Trabalho.Programacao3.service;
 
 
+import com.bookstore.Trabalho.Programacao3.document.auth.Login;
 import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface AbstractUserService<U> {
     List<U> findUsers();
 
     U findUserById(String userId);
-    U findUserByEmail(String email);
+    U authenticateUser(Login login);
     U createNewUser(U user);
     U updateUserById(String userId, UserRequest dto);
 

@@ -44,19 +44,9 @@ public class UserRequest {
     @CPF(message = "invalid cpf")
     private String cpf;
 
-    private CreditCard creditCard;
+
 
     @NotBlank
     private Address address;
 
-    public UserRequest(User user) {
-        this.userId = user.getUserId();
-        this.userName = user.getUserName();
-        this.birthDay = user.getBirthDay();
-        this.password = user.getPassword();
-        this.email = user.getEmail();
-        this.cpf = user.getCpf();
-        this.address = user.getAddress();
-        this.creditCard =user.getCreditCard();
-    }
 }

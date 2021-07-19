@@ -4,7 +4,13 @@ import com.bookstore.Trabalho.Programacao3.document.User;
 
 import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
 
+
+
+
 public class UserMapper {
+
+
+
 
     public static User mapToModel(UserRequest dto){
         return User.builder()
@@ -26,8 +32,10 @@ public class UserMapper {
                 .birthDay(user.getBirthDay())
                 .password(user.getPassword())
                 .email(user.getEmail())
-
+                .cpf(user.getCpf())
                 .address(user.getAddress())
                 .build();
     }
+
+
 }

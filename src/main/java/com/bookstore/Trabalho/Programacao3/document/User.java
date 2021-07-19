@@ -2,18 +2,11 @@ package com.bookstore.Trabalho.Programacao3.document;
 
 
 import com.bookstore.Trabalho.Programacao3.document.payment.CreditCard;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.br.CPF;
+import lombok.*;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 
@@ -22,6 +15,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class User {
 
     @Id
@@ -32,6 +26,10 @@ public class User {
     private String password;
     private String email;
     private String cpf;
-    private CreditCard creditCard;
     private Address address;
+
+
+
+
+
 }

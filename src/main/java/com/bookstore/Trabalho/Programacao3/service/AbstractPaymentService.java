@@ -11,7 +11,7 @@ public interface AbstractPaymentService{
 
 
     PaymentRequest findPaymentById(String paymentId);
-    PaymentResponse createPayment(RequestPaymentRequest paymentDTO);
+   // PaymentResponse createPayment(RequestPaymentRequest paymentDTO);
     void deletePaymentById(String userId);
     void checkIfPaymentIsNotNull(Optional<RequestPaymentRequest> dto);
 }

@@ -25,10 +25,10 @@ public class PaymentControllerImpl implements PaymentController {
         return ResponseEntity.ok(paymentService.findPaymentById(paymentId));
     }
 
-    @Override
+   /* @Override
     public ResponseEntity<?> makePayment(RequestPaymentRequest requestPaymentRequest) {
         return new ResponseEntity<>(paymentService.createPayment(requestPaymentRequest), HttpStatus.CREATED);
-    }
+    }*/
 
     @Override
     public ResponseEntity<?> deletePayment(String paymentId) {
