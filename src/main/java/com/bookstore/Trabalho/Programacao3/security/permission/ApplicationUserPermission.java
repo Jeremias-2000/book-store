@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ApplicationUserPermission {
 
-/*    USER_READ("user:read"),
+   USER_READ("user:read"),
     USER_WRITE("user:write"),
 
     BOOK_READ("book:read"),
@@ -16,7 +16,7 @@ public enum ApplicationUserPermission {
     PAYMENT_READ("payment:read"),
     PAYMENT_WRITE("payment:write");
 
-    private final String permission;*/
+    private final String permission;
 
 
 

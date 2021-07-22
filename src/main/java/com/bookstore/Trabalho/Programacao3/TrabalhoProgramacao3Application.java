@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication (exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication
 @EnableSwagger2
 @EnableCaching
 public class TrabalhoProgramacao3Application {

@@ -18,6 +18,7 @@ public interface AbstractUserService<U> {
 
     void deleteUserById(String userId);
 
+    void checkIfEmailAlreadyExists(String email);
     void checkIfUserAlreadyExists(UserRequest dto);
     void checkIfUserIsNotNull(Optional<UserRequest> dto);
 }

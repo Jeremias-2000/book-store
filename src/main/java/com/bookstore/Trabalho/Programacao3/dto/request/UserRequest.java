@@ -9,15 +9,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRequest {
+public class UserRequest  {
+
+
+
+
 
     private String userId;
 
@@ -44,9 +53,12 @@ public class UserRequest {
     @CPF(message = "invalid cpf")
     private String cpf;
 
-
-
+    @NotEmpty
     @NotBlank
     private Address address;
+
+
+
+
 
 }

@@ -28,7 +28,7 @@ public class UserMapper {
     public static UserRequest mapToDTO(User user){
         return UserRequest.builder().
                 userId(user.getUserId())
-                .userName(user.getUserName())
+                .userName(user.getUsername())
                 .birthDay(user.getBirthDay())
                 .password(user.getPassword())
                 .email(user.getEmail())

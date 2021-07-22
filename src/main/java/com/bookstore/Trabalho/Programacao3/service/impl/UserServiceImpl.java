@@ -15,10 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.bookstore.Trabalho.Programacao3.mapper.UserMapper.*;
 import static java.util.Optional.*;
 
 
@@ -52,7 +54,7 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
     @Override
     public UserRequest authenticateUser(Login login) {
         boolean valid = false;
-        UserRequest response = UserMapper.mapToDTO(userRepository.findUserByEmail(login.getEmail()));
+        UserRequest response = mapToDTO(userRepository.findUserByEmail(login.getEmail()));
         if (response.equals(null)){
             throw new ExceptionForEmailNotFound("Email does not existes"+ login.getEmail());
         }
@@ -69,14 +71,14 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
         checkIfUserAlreadyExists(user);
         user.setPassword(encoder.encode(user.getPassword()));
 
-        userRepository.save(UserMapper.mapToModel(user));
+        userRepository.save(mapToModel(user));
         return user ;
     }
 
     @Override
     public UserRequest updateUserById(String userId, UserRequest dto) {
         userRepository.findById(userId)
-                .map(user -> UserMapper.mapToModel(dto));
+                .map(user -> mapToModel(dto));
 
          return dto;
     }
@@ -84,7 +86,7 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
     @Override
     public void deleteUserById(String userId) {
         UserRequest dto = findUserById(userId);
-        userRepository.delete(UserMapper.mapToModel(dto));
+        userRepository.delete(mapToModel(dto));
     }
 
     @Override
@@ -99,5 +101,13 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
             if (!dto.isPresent()){
                 throw  new ExceptionByNullUser("the user is null " +  dto);
             }
+    }
+
+    @Override
+    public void checkIfEmailAlreadyExists(String email) {
+        Optional<UserRequest> search = ofNullable(mapToDTO(userRepository.findUserByEmail(email)));
+        if (search.isPresent()){
+            throw new ExceptionForEmailAlreadyExists("Email already registered "+ email);
+        }
     }
 }
