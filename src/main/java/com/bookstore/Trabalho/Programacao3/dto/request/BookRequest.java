@@ -34,7 +34,7 @@ public class BookRequest {
     private Date launchData;
     @NotEmpty
     @NotBlank
-    private String price;
+    private double price;
     @NotBlank
     private int quantity;
 }

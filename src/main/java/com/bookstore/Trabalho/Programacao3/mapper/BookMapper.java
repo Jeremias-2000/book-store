@@ -15,6 +15,7 @@ public class BookMapper {
                 .author(bookRequest.getAuthor())
                 .launchData(bookRequest.getLaunchData())
                 .quantity(bookRequest.getQuantity())
+                .price(bookRequest.getPrice())
                 .build();
     }
 
@@ -27,6 +28,7 @@ public class BookMapper {
                 .author(book.getAuthor())
                 .launchData(book.getLaunchData())
                 .quantity(book.getQuantity())
+                .price(book.getPrice())
                 .build();
     }
 }

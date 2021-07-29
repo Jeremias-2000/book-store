@@ -3,59 +3,61 @@ package com.bookstore.Trabalho.Programacao3.dto.request;
 
 import com.bookstore.Trabalho.Programacao3.document.Address;
 import com.bookstore.Trabalho.Programacao3.document.User;
-import com.bookstore.Trabalho.Programacao3.document.payment.CreditCard;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 import javax.validation.constraints.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Optional;
+import java.time.LocalDate;
+
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class UserRequest  {
-
-
-
 
 
     private String userId;
 
-    @NotEmpty
-    @NotNull
+    @NotBlank(message = "Nome do usuário não informado")
+    @Pattern(regexp = "^[A-Z]+(.)*",message = "Nome deve iniciar com letra maiúscula")
     @Size(max = 200)
-    private String  userName;
+    private String  username;
 
-    @NotBlank
-    private Date birthDay;
 
-    @NotBlank
-    @NotEmpty
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
+    private LocalDate birthDay;
+
+    @NotBlank(message = "Email não informado")
     @Size(min = 8)
     private String password;
 
-    @NotBlank
-    @NotEmpty
+    @NotBlank(message = "Email não informado")
     @Email(message = "invalid email")
     private String email;
 
-    @NotBlank
-    @NotEmpty
+    @NotBlank(message = "Campo inválido")
     @CPF(message = "invalid cpf")
     private String cpf;
 
-    @NotEmpty
-    @NotBlank
+    @NotNull
     private Address address;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

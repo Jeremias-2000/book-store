@@ -26,6 +26,6 @@ public class Book {
     private BookGenre genre;
     private String author;
     private Date launchData;
-    private String price;
+    private double price;
     private int quantity;
 }

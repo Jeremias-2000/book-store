@@ -52,7 +52,7 @@ public class BookControllerImpl implements BookController {
     }
 
     @Override
-    @CacheEvict("bookId")
+    @CacheEvict(value = {"Books","bookId"},allEntries = true)
     public ResponseEntity<?> deleteBook(String bookId) {
         bookService.deleteBook(bookId);
         return ResponseEntity.ok().build();

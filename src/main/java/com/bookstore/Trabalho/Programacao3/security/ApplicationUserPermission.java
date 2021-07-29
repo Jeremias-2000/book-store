@@ -1,4 +1,4 @@
-package com.bookstore.Trabalho.Programacao3.security.permission;
+package com.bookstore.Trabalho.Programacao3.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

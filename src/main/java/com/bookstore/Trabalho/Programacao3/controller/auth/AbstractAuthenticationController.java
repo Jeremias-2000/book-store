@@ -12,12 +12,13 @@ import javax.validation.Valid;
 
 public interface AbstractAuthenticationController {
 
-    @PostMapping("/login")
-    ResponseEntity<?> authenticate(@RequestBody @Valid Login login);
+   /* @PostMapping("/login")
+    ResponseEntity<?> authenticate(@RequestBody @Valid Login login) throws Exception;*/
 
-/*
-    @PostMapping("/save")
- //   @PreAuthorize("hasAuthority('user:write')")
+
+    @PostMapping("/signup")
     @ApiOperation(value = "Cadastra um novo usuario")
-    ResponseEntity<?> creteUser(@RequestBody UserRequest dto);*/
+    ResponseEntity<?> createUser(@RequestBody @Valid UserRequest dto);
+
+
 }

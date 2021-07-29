@@ -1,6 +1,7 @@
 package com.bookstore.Trabalho.Programacao3.document;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -12,7 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Builder
 public class UserFavorite {
 
     @Id

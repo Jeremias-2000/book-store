@@ -2,8 +2,6 @@ package com.bookstore.Trabalho.Programacao3.service.impl;
 
 
 import com.bookstore.Trabalho.Programacao3.document.User;
-import com.bookstore.Trabalho.Programacao3.document.auth.Login;
-import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartOperationRequest;
 import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
 import com.bookstore.Trabalho.Programacao3.exception.*;
 import com.bookstore.Trabalho.Programacao3.mapper.UserMapper;
@@ -12,10 +10,11 @@ import com.bookstore.Trabalho.Programacao3.service.AbstractUserService;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,16 +29,14 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
 
 
     private UserRepository userRepository;
-    private CartServiceImpl cartService;
-    private PasswordEncoder encoder;
+
+
 
     @Override
-    public List<UserRequest> findUsers() {
-        return userRepository.findAll()
-                .stream().map(UserMapper::mapToDTO)
-                .collect(Collectors.toList());
-    }
+    public Page<UserRequest> findUsers(Pageable pageable) {
+       return userRepository.findAll(pageable).map(UserMapper::mapToDTO);
 
+    }
 
 
 
@@ -48,30 +45,20 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
         return userRepository.findById(userId)
                 .map(UserMapper::mapToDTO)
                 .orElseThrow(() ->
-                        new UserNotFoundException("id does not exists" + userId));
+                        new UserNotFoundException("id does not exists  ==> " + userId + "\n"));
     }
 
-    @Override
-    public UserRequest authenticateUser(Login login) {
-        boolean valid = false;
-        UserRequest response = mapToDTO(userRepository.findUserByEmail(login.getEmail()));
-        if (response.equals(null)){
-            throw new ExceptionForEmailNotFound("Email does not existes"+ login.getEmail());
-        }
-        valid = encoder.matches(login.getPassword(), response.getPassword());
-        if (!valid){
-            throw new ExceptionForUnauthorizedAuthentication("Unauthorized authentication" + login);
-        }
-         return response;
-    }
+
 
     @Override
     public UserRequest createNewUser(UserRequest user) {
+
         checkIfUserIsNotNull(ofNullable(user));
         checkIfUserAlreadyExists(user);
-        user.setPassword(encoder.encode(user.getPassword()));
+        checkIfEmailAlreadyExists(user.getEmail());
 
         userRepository.save(mapToModel(user));
+
         return user ;
     }
 
@@ -85,13 +72,13 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
 
     @Override
     public void deleteUserById(String userId) {
-        UserRequest dto = findUserById(userId);
-        userRepository.delete(mapToModel(dto));
+        findUserById(userId);
+        userRepository.deleteById(userId);
     }
 
     @Override
     public void checkIfUserAlreadyExists(UserRequest dto) {
-        if (dto.getUserName().equals(userRepository.findUserByUserName(dto.getUserName()))){
+        if (dto.getUsername().equals(userRepository.findUserByUsername(dto.getUsername()))){
             throw new ExceptionPerExistingUser("the  user already exists" + dto);
         }
     }
