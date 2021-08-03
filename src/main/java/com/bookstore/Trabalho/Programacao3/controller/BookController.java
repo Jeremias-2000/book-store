@@ -3,6 +3,9 @@ package com.bookstore.Trabalho.Programacao3.controller;
 
 import com.bookstore.Trabalho.Programacao3.dto.request.BookRequest;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 
 
@@ -13,7 +16,7 @@ public interface BookController {
     @GetMapping("/all")
 
     @ApiOperation(value = "retorna uma lista de livros")
-    ResponseEntity<?> findBooks();
+    ResponseEntity<?> findBooks(@PageableDefault(page = 0,size = 10,sort = "name",direction = Sort.Direction.ASC) Pageable pageable);
 
     @GetMapping("/find/id/{bookId}")
 

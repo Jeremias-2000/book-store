@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Data
@@ -18,6 +19,7 @@ public class ShoppingCartOperationRequest {
     private String cartId;
     @NotBlank
     private String userId;
+    @NotEmpty
     private List<Book> books;
 
     public void add(Book book){

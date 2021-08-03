@@ -10,6 +10,8 @@ import com.bookstore.Trabalho.Programacao3.mapper.BookMapper;
 import com.bookstore.Trabalho.Programacao3.repository.BookRepository;
 import com.bookstore.Trabalho.Programacao3.service.AbstractBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,10 +31,9 @@ public class BookServiceImpl implements AbstractBookService<BookRequest> {
     }
 
     @Override
-    public List<BookRequest> findBooks() {
-        return bookRepository.findAll()
-                .stream().map(BookMapper::mapToDTO)
-                .collect(Collectors.toList());
+    public Page<BookRequest> findBooks(Pageable pageable) {
+        return bookRepository.findAll(pageable)
+                .map(BookMapper::mapToDTO);
     }
 
     @Override

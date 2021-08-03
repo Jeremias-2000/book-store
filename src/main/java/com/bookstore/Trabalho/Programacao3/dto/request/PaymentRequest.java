@@ -19,7 +19,7 @@ import java.time.LocalDate;
 public class PaymentRequest {
 
     private String paymentId;
-    @NotEmpty
+
     @NotBlank
     private String userId;
     @NotEmpty

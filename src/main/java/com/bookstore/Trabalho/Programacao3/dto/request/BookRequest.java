@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
@@ -18,21 +19,17 @@ import java.util.Date;
 public class BookRequest {
 
     private String bookId;
-    @NotEmpty
-    @NotBlank
+
+    @NotBlank(message = "Nome do livro não informado")
     private String name;
-    @NotEmpty
+    @NotBlank(message = "deve possuir alguma descrição")
     private String description;
-    @NotEmpty
-    @NotBlank
+    @NotBlank(message = " Gênero do livro não informado")
     private BookGenre genre;
-    @NotEmpty
-    @NotBlank
+    @NotBlank(message = "autor do livro não informado")
     private String author;
-    @NotEmpty
     @NotBlank
     private Date launchData;
-    @NotEmpty
     @NotBlank
     private double price;
     @NotBlank

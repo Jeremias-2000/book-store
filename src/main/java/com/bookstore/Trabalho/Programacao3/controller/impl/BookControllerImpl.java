@@ -7,6 +7,7 @@ import com.bookstore.Trabalho.Programacao3.service.impl.BookServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,8 +26,8 @@ public class BookControllerImpl implements BookController {
 
     @Override
     @Cacheable("Books")
-    public ResponseEntity<?> findBooks() {
-        return ResponseEntity.ok(bookService.findBooks());
+    public ResponseEntity<?> findBooks(Pageable pageable) {
+        return ResponseEntity.ok(bookService.findBooks(pageable));
     }
 
     @Override
