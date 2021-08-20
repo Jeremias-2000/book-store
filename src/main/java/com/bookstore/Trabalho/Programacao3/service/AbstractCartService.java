@@ -1,22 +1,18 @@
 package com.bookstore.Trabalho.Programacao3.service;
 
 import com.bookstore.Trabalho.Programacao3.document.Book;
+import com.bookstore.Trabalho.Programacao3.dto.request.CartRequest;
 import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartRequest;
-import com.bookstore.Trabalho.Programacao3.dto.response.ShoppingCartResponse;
-import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartOperationRequest;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public interface AbstractCartService {
+public interface AbstractCartService<SC> {
 
-   List<ShoppingCartOperationRequest> findShoppingCarts ();
-   ShoppingCartOperationRequest findCartById(String cartId);
-   ShoppingCartResponse addBookInShoppingCart(String cartId, ShoppingCartRequest dto);
-   ShoppingCartOperationRequest removeBookInShoppingCart(String cartId, int positionNumber);
+   List<SC> findShoppingCarts ();
+   SC findCartById(String cartId);
+   SC addBookInShoppingCart(SC dto);
+   SC updateShoppingCart(CartRequest dto);
    void deleteShoppingCartById(String cartId);
-
-   void checkIfThePositionIsValid(List<Book> books, int position);
-   ShoppingCartOperationRequest createShoppingCart(ShoppingCartOperationRequest cartDTO);
-
-   void checkIfTheShoppingCartIsNull(ShoppingCartOperationRequest dto);
+   void checkIfTheShoppingCartIsNull(ShoppingCartRequest dto);
 }

@@ -3,6 +3,8 @@ package com.bookstore.Trabalho.Programacao3.controller;
 import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
 import io.swagger.annotations.ApiOperation;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;

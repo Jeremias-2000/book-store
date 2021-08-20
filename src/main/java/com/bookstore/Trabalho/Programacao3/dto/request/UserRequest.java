@@ -7,10 +7,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @Data
@@ -22,6 +25,9 @@ public class UserRequest  {
 
 
     private String userId;
+
+    @NotBlank(message = "URL da imagem não informada")
+    private String imageUrl;
 
     @NotBlank(message = "Nome do usuário não informado")
     @Pattern(regexp = "^[A-Z]+(.)*",message = "Nome deve iniciar com letra maiúscula")
@@ -46,6 +52,8 @@ public class UserRequest  {
 
     @NotNull
     private Address address;
+
+
 
 
 

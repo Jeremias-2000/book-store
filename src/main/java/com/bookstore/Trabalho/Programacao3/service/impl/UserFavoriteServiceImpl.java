@@ -1,11 +1,11 @@
 package com.bookstore.Trabalho.Programacao3.service.impl;
 
-import com.bookstore.Trabalho.Programacao3.document.UserFavorite;
+
 import com.bookstore.Trabalho.Programacao3.dto.request.FavoriteRequest;
 import com.bookstore.Trabalho.Programacao3.dto.request.UserFavoriteRequest;
 import com.bookstore.Trabalho.Programacao3.dto.response.UserFavoriteResponse;
 import com.bookstore.Trabalho.Programacao3.mapper.FavoriteMapper;
-import com.bookstore.Trabalho.Programacao3.mapper.UserMapper;
+
 import com.bookstore.Trabalho.Programacao3.repository.UserFavoriteRepository;
 import com.bookstore.Trabalho.Programacao3.service.AbstractUserFavorite;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,6 +7,7 @@ public class CreditCardMapper {
 
     public static CreditCard mapToModel(CreditCardRequest dto){
         return CreditCard.builder()
+                .userId(dto.getUserId())
                 .cardName(dto.getCardName())
                 .number(dto.getNumber())
                 .expirationTime(dto.getExpirationTime())

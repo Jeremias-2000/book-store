@@ -29,8 +29,6 @@ public class UserControllerImpl implements UserController {
     private UserServiceImpl userService;
 
 
-
-
     @Override
     @Cacheable("Users")
     public ResponseEntity<?> findUsers(Pageable pageable) {

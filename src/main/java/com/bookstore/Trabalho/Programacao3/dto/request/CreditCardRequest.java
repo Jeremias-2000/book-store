@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class CreditCardRequest {
 
+    private String userId;
     private String cardName;
     private String number;
     private LocalDate expirationTime;

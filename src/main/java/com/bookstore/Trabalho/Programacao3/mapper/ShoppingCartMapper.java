@@ -1,12 +1,12 @@
 package com.bookstore.Trabalho.Programacao3.mapper;
 
 import com.bookstore.Trabalho.Programacao3.document.ShoppingCart;
-import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartOperationRequest;
+import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartRequest;
 
 public class ShoppingCartMapper {
 
 
-    public static ShoppingCart mapToModel(ShoppingCartOperationRequest dto){
+    public static ShoppingCart mapToModel(ShoppingCartRequest dto){
         return ShoppingCart.builder()
                 .cartId(dto.getCartId())
                 .userId(dto.getUserId())
@@ -14,8 +14,8 @@ public class ShoppingCartMapper {
                 .build();
     }
 
-    public static ShoppingCartOperationRequest mapToDTO(ShoppingCart cart){
-        return ShoppingCartOperationRequest.builder()
+    public static ShoppingCartRequest mapToDTO(ShoppingCart cart){
+        return ShoppingCartRequest.builder()
                 .cartId(cart.getCartId())
                 .userId(cart.getUserId())
                 .books(cart.getBooks())

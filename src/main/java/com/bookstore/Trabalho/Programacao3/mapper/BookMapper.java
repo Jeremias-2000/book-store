@@ -9,6 +9,7 @@ public class BookMapper {
     public static  Book mapToModel(BookRequest bookRequest){
         return Book.builder()
                 .bookId(bookRequest.getBookId())
+                .imageUrl(bookRequest.getImageUrl())
                 .name(bookRequest.getName())
                 .description(bookRequest.getDescription())
                 .genre(bookRequest.getGenre())
@@ -22,6 +23,7 @@ public class BookMapper {
     public static BookRequest mapToDTO(Book book){
         return BookRequest.builder()
                 .bookId(book.getBookId())
+                .imageUrl(book.getImageUrl())
                 .name(book.getName())
                 .description(book.getDescription())
                 .genre(book.getGenre())

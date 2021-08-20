@@ -83,9 +83,8 @@ public class PaymentServiceImpl implements AbstractPaymentService{
 
     @Override
     public void deletePaymentById(String paymentId) {
-        Payment payment = new Payment();
-        payment = PaymentMapper.mapToModel(findPaymentById(paymentId));
-        paymentRepository.delete(payment);
+        findPaymentById(paymentId);
+        paymentRepository.deleteById(paymentId);
     }
 
     @Override

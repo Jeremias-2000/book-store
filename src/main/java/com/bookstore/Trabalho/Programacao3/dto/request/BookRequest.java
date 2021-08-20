@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -16,10 +19,12 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookRequest {
+public class BookRequest  {
 
     private String bookId;
 
+    @NotBlank(message = "Nome do livro não informado")
+    private String imageUrl;
     @NotBlank(message = "Nome do livro não informado")
     private String name;
     @NotBlank(message = "deve possuir alguma descrição")
@@ -34,4 +39,5 @@ public class BookRequest {
     private double price;
     @NotBlank
     private int quantity;
+
 }

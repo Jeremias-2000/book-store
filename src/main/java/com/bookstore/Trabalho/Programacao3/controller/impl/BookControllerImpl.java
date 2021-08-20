@@ -6,14 +6,19 @@ import com.bookstore.Trabalho.Programacao3.dto.request.BookRequest;
 import com.bookstore.Trabalho.Programacao3.service.impl.BookServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.Cacheable;
+
+
 
 @RestController
 @RequestMapping("/api/v1/book")
@@ -22,12 +27,15 @@ import springfox.documentation.annotations.Cacheable;
 public class BookControllerImpl implements BookController {
 
     @Autowired
+
     private BookServiceImpl bookService;
 
     @Override
     @Cacheable("Books")
     public ResponseEntity<?> findBooks(Pageable pageable) {
-        return ResponseEntity.ok(bookService.findBooks(pageable));
+        Page<BookRequest> bookRequests = bookService.findBooks(pageable);
+        return bookRequests.isEmpty() ? ResponseEntity.notFound().build():ResponseEntity.ok(bookRequests);
+
     }
 
     @Override

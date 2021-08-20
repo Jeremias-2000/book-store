@@ -1,5 +1,6 @@
 package com.bookstore.Trabalho.Programacao3.controller;
 
+import com.bookstore.Trabalho.Programacao3.dto.request.CartRequest;
 import com.bookstore.Trabalho.Programacao3.dto.request.ShoppingCartRequest;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +16,13 @@ public interface CartController {
     ResponseEntity<?> findCartById(@PathVariable("cartId") String cartId);
 
 
-    @PutMapping("/add/book/id/{cartId}")
+    @PostMapping("/add/cart/")
     @ApiOperation(value = "Adiciona um livro específico do carrinho de compras")
-    ResponseEntity<?> addBook(@PathVariable("cartId") String cartId,@RequestBody ShoppingCartRequest dto);
+    ResponseEntity<?> addToCart(@RequestBody ShoppingCartRequest dto);
 
-
-    @PutMapping("/remove/book/id/{cartId}/position/{position}")
-    @ApiOperation(value = "Remove um livro específico do carrinho de compras")
-    ResponseEntity<?> removeBook(@PathVariable("cartId") String cartId,@PathVariable("position") int position);
+    @PutMapping("/update/cart/")
+    @ApiOperation(value = "Atualiza o carrinho de compras")
+    ResponseEntity<?> updateCart(@RequestBody CartRequest request);
 
     @DeleteMapping("delete/{cartId}")
     ResponseEntity<?> deleteShoppingCart(@PathVariable("cartId") String cartId);
