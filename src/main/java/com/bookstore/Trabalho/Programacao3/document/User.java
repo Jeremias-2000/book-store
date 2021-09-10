@@ -23,7 +23,6 @@ public class User  {
 
     @Id
     private String userId;
-    private String imageUrl;
     private String  username;
     private LocalDate birthDay;
     private String password;

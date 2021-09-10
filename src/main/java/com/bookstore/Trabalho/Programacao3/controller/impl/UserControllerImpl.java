@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/user")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @Api(value = "Users")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserControllerImpl implements UserController {

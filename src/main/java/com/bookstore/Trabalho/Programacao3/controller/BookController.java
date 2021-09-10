@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 public interface BookController {
 
     @GetMapping("/all")
@@ -31,7 +33,7 @@ public interface BookController {
     @PostMapping("/save")
 
     @ApiOperation(value = "salva um livro")
-    ResponseEntity<?> createBook(@RequestBody BookRequest dto);
+    ResponseEntity<?> createBook(@RequestBody @Valid BookRequest dto);
 
     @PutMapping("/update/id/{bookId}")
     @ApiOperation(value = "atualiza um livro")

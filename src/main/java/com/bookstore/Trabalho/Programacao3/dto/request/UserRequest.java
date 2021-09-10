@@ -26,8 +26,6 @@ public class UserRequest  {
 
     private String userId;
 
-    @NotBlank(message = "URL da imagem não informada")
-    private String imageUrl;
 
     @NotBlank(message = "Nome do usuário não informado")
     @Pattern(regexp = "^[A-Z]+(.)*",message = "Nome deve iniciar com letra maiúscula")

@@ -5,11 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
+@DataMongoTest
 class BookServiceImplTest {
 
     @InjectMocks
@@ -21,10 +23,12 @@ class BookServiceImplTest {
 
     @Test
     void findBooks() {
+
     }
 
     @Test
     void findBookById() {
+
     }
 
     @Test
