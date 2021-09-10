@@ -1,7 +1,5 @@
 package com.bookstore.Trabalho.Programacao3.document.payment;
 
-
-import com.bookstore.Trabalho.Programacao3.enums.FlagType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,13 +14,13 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Card {
+public class PaymentSlip {
 
     @Id
-    private String cardId;
-    private String cardName;
-    private String number;
-    private LocalDate expirationTime;
-    private FlagType flagType;
+    private String paymentId;
+    private String userId;
+    private Integer number;
+    private LocalDate dueDate;
+
 
 }

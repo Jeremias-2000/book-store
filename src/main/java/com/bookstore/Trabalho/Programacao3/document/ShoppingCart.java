@@ -1,23 +1,28 @@
-package com.bookstore.Trabalho.Programacao3.document.payment;
+package com.bookstore.Trabalho.Programacao3.document;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.domain.Page;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Document
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Ticket {
+public class ShoppingCart {
 
     @Id
-    private String ticketId;
-    private Integer number;
-    private LocalDate dueDate;
+    private String cartId;
+    private String userId;
+    private List<Book> books;
+
+
+
+
 }

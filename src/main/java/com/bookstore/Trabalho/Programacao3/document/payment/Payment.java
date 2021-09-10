@@ -1,6 +1,8 @@
 package com.bookstore.Trabalho.Programacao3.document.payment;
 
+import com.bookstore.Trabalho.Programacao3.document.User;
 import com.bookstore.Trabalho.Programacao3.enums.PaymentMethods;
+import com.bookstore.Trabalho.Programacao3.enums.Status;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,13 +21,15 @@ import static com.fasterxml.jackson.annotation.JsonInclude.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(Include.NON_NULL)
-public class FormOfPayment {
+public class Payment {
 
     @Id
     private String paymentId;
+    private String userId;
     private Double price;
     private LocalDate registrationDate;
     private PaymentMethods paymentMethod;
-    private Ticket ticket;
-
+    private PaymentSlip paymentSlip;
+    private Status status;
+    private CreditCard creditCard;
 }

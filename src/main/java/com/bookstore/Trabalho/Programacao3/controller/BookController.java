@@ -1,11 +1,46 @@
 package com.bookstore.Trabalho.Programacao3.controller;
 
 
+import com.bookstore.Trabalho.Programacao3.dto.request.BookRequest;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+
+
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 public interface BookController {
 
-    @GetMapping("/teste")
-    String testeEndpoint();
+    @GetMapping("/all")
+
+    @ApiOperation(value = "retorna uma lista de livros")
+    ResponseEntity<?> findBooks(@PageableDefault(page = 0,size = 10,sort = "name",direction = Sort.Direction.ASC) Pageable pageable);
+
+    @GetMapping("/find/id/{bookId}")
+
+    @ApiOperation(value = "retorna  livro específico")
+    ResponseEntity<?> findBookById(@PathVariable("bookId") String bookId);
+
+    @GetMapping("/find/name/{name}")
+
+    @ApiOperation(value = "Retorna pesquisa de livros")
+    ResponseEntity<?> findBookByName(@PathVariable("name") String name);
+
+    @PostMapping("/save")
+
+    @ApiOperation(value = "salva um livro")
+    ResponseEntity<?> createBook(@RequestBody @Valid BookRequest dto);
+
+    @PutMapping("/update/id/{bookId}")
+    @ApiOperation(value = "atualiza um livro")
+    ResponseEntity<?> updateBook(@PathVariable("bookId") String bookId,@RequestBody BookRequest dto);
+
+    @DeleteMapping("/delete/id/{bookId}/")
+
+    @ApiOperation(value = "deleta um livro")
+    ResponseEntity<?> deleteBook(@PathVariable("bookId") String bookId);
 }

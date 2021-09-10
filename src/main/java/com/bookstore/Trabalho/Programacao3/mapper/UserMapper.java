@@ -2,32 +2,40 @@ package com.bookstore.Trabalho.Programacao3.mapper;
 
 import com.bookstore.Trabalho.Programacao3.document.User;
 
-import com.bookstore.Trabalho.Programacao3.dto.UserDTO;
+import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
+
+
 
 public class UserMapper {
 
-    public User mapToModel(UserDTO dto){
+
+
+
+    public static User mapToModel(UserRequest dto){
         return User.builder()
                 .userId(dto.getUserId())
-                .userName(dto.getUserName())
+                .username(dto.getUsername())
                 .birthDay(dto.getBirthDay())
                 .password(dto.getPassword())
                 .email(dto.getEmail())
-
+                .cpf(dto.getCpf())
                 .address(dto.getAddress())
                 .build();
     }
 
 
-    public UserDTO mapToDTO(User user){
-        return UserDTO.builder().
-                userId(user.getUserId())
-                .userName(user.getUserName())
+    public static UserRequest mapToDTO(User user){
+        return  UserRequest.builder()
+                .userId(user.getUserId())
+                .username(user.getUsername())
                 .birthDay(user.getBirthDay())
                 .password(user.getPassword())
                 .email(user.getEmail())
-
+                .cpf(user.getCpf())
                 .address(user.getAddress())
                 .build();
     }
+
+
+
 }

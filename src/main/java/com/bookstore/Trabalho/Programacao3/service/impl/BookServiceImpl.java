@@ -1,57 +1,87 @@
 package com.bookstore.Trabalho.Programacao3.service.impl;
 
-import com.bookstore.Trabalho.Programacao3.document.Book;
+
+import com.bookstore.Trabalho.Programacao3.dto.request.BookRequest;
+import com.bookstore.Trabalho.Programacao3.exception.BookNotFounException;
+import com.bookstore.Trabalho.Programacao3.exception.ExceptionByNullBook;
+
+import com.bookstore.Trabalho.Programacao3.mapper.BookMapper;
+
 import com.bookstore.Trabalho.Programacao3.repository.BookRepository;
-import com.bookstore.Trabalho.Programacao3.service.BookService;
+import com.bookstore.Trabalho.Programacao3.service.AbstractBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.util.Optional.*;
 
 @Service
-public class BookServiceImpl implements BookService<Book> {
+public class BookServiceImpl implements AbstractBookService<BookRequest>{
 
     @Autowired
     private BookRepository bookRepository;
 
-
-    @Override
-    public List<Book> findBooks() {
-        return bookRepository.findAll();
+    public BookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
     @Override
-    public Book findBookById(String bookId) {
-        return null;
+    public Page<BookRequest> findBooks(Pageable pageable) {
+        return bookRepository.findAll(pageable)
+                .map(BookMapper::mapToDTO);
     }
 
     @Override
-    public Book findBookByName(String name) {
-        return null;
+    public BookRequest findBookById(String bookId) {
+        return bookRepository.findById(bookId)
+                .map(BookMapper::mapToDTO)
+                .orElseThrow(() ->
+                        new BookNotFounException("The book does not exists" + bookId));
     }
 
     @Override
-    public Book createBook(Book book) {
-        return null;
+    public List<BookRequest> findBookByName(String name) {
+        return bookRepository.findByName(name)
+                .stream().map(BookMapper::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Book updateBook(String bookId,Book book) {
-        return null;
+    public BookRequest createBook(BookRequest dto) {
+         checkIfBookIsNull(ofNullable(dto));
+         checkIfBookAlreadyRegistered(dto);
+         bookRepository.save(BookMapper.mapToModel(dto));
+         return dto;
+    }
+
+    @Override
+    public BookRequest updateBook(String bookId, BookRequest dto) {
+        bookRepository.findById(bookId)
+                .map(book -> BookMapper.mapToModel(dto));
+        return dto;
     }
 
     @Override
     public void deleteBook(String bookId) {
-
+        BookRequest dto = findBookById(bookId);
+        bookRepository.delete(BookMapper.mapToModel(dto));
     }
 
     @Override
-    public void checkIfBookIsNull(Book book) {
-
+    public void checkIfBookIsNull(Optional<BookRequest> bookDTO) {
+        if (!bookDTO.isPresent()){
+            throw new ExceptionByNullBook("the book is null" + bookDTO);
+        }
     }
 
     @Override
-    public void checkIfBookAlreadyRegistered(Book book) {
+    public void checkIfBookAlreadyRegistered(BookRequest book) {
 
     }
 }

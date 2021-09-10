@@ -8,12 +8,14 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum FlagType {
 
-    VISA,
-    HIPERCARD,
-    MASTERCARD,
-    NUBANK,
-    C6BANK,
-    NEXT,
-    PAGBANK,
-    ITAUCARD
+    VISA("visa"),
+    HIPERCARD("hipercard"),
+    MASTERCARD("mastercard"),
+    NUBANK("nubank"),
+    C6BANK("c6bank"),
+    NEXT("next"),
+    PAGBANK("pagbank"),
+    ITAUCARD("itaucard");
+
+    private final String description;
 }
