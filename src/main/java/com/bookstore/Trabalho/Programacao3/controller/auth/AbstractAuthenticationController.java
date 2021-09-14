@@ -18,7 +18,7 @@ public interface AbstractAuthenticationController {
 
     @PostMapping("/signup")
     @ApiOperation(value = "Cadastra um novo usuario")
-    ResponseEntity<?> createUser(@RequestBody @Valid UserRequest dto);
+    ResponseEntity<?> createUser(@RequestBody  UserRequest dto);
 
 
 }

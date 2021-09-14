@@ -19,7 +19,7 @@ public class UserMapper {
                 .password(dto.getPassword())
                 .email(dto.getEmail())
                 .cpf(dto.getCpf())
-                .address(dto.getAddress())
+                .endereco(dto.getEndereco())
                 .build();
     }
 
@@ -32,7 +32,7 @@ public class UserMapper {
                 .password(user.getPassword())
                 .email(user.getEmail())
                 .cpf(user.getCpf())
-                .address(user.getAddress())
+                .endereco(user.getEndereco())
                 .build();
     }
 

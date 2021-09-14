@@ -28,7 +28,7 @@ public class User  {
     private String password;
     private String email;
     private String cpf;
-    private Address address;
+    private Endereco endereco;
     @CreatedDate
     private Date createdDate;
     @LastModifiedDate

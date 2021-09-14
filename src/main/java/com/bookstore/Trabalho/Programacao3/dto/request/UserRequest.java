@@ -1,10 +1,12 @@
 package com.bookstore.Trabalho.Programacao3.dto.request;
 
 
-import com.bookstore.Trabalho.Programacao3.document.Address;
+
+import com.bookstore.Trabalho.Programacao3.document.Endereco;
 import com.bookstore.Trabalho.Programacao3.document.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.CreatedDate;
@@ -20,7 +22,6 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 public class UserRequest  {
 
 
@@ -48,8 +49,8 @@ public class UserRequest  {
     @CPF(message = "invalid cpf")
     private String cpf;
 
-    @NotNull
-    private Address address;
+
+    private Endereco endereco;
 
 
 

@@ -1,13 +1,16 @@
 package com.bookstore.Trabalho.Programacao3.service.impl;
 
 
+import com.bookstore.Trabalho.Programacao3.document.Endereco;
 import com.bookstore.Trabalho.Programacao3.document.User;
 import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
 import com.bookstore.Trabalho.Programacao3.exception.*;
 import com.bookstore.Trabalho.Programacao3.mapper.UserMapper;
+import com.bookstore.Trabalho.Programacao3.repository.EnderecoRepository;
 import com.bookstore.Trabalho.Programacao3.repository.UserRepository;
 import com.bookstore.Trabalho.Programacao3.service.AbstractUserService;
 
+import com.bookstore.Trabalho.Programacao3.service.cep.ViaApiService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,7 +33,8 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
 
 
     private UserRepository userRepository;
-
+    private EnderecoRepository enderecoRepository;
+    private ViaApiService viaCepService;
 
 
     @Override
@@ -54,14 +58,22 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
     @Override
     public UserRequest createNewUser(UserRequest user) {
 
-        checkIfUserIsNotNull(ofNullable(user));
         checkIfUserAlreadyExists(user);
         checkIfEmailAlreadyExists(user.getEmail());
 
+        String cep = user.getEndereco().getCep();
+        //verifica se existe endereco
+        Endereco endereco =  enderecoRepository.findById(cep).orElseGet(() -> {
+            Endereco novoEndereco = viaCepService.consultarCep(cep);
+            enderecoRepository.save(novoEndereco);
+            return novoEndereco;
+        });
 
-        userRepository.save(mapToModel(user));
 
-        return user ;
+        user.setEndereco(endereco);
+        checkIfUserIsNotNull(user);
+
+        return mapToDTO(userRepository.save(mapToModel(user)));
     }
 
     @Override
@@ -86,16 +98,17 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
     }
 
     @Override
-    public void checkIfUserIsNotNull(Optional<UserRequest> dto) {
-            if (!dto.isPresent()){
+    public void checkIfUserIsNotNull(UserRequest dto) {
+            if (!dto.equals(null)){
                 throw  new ExceptionByNullUser("the user is null " +  dto);
             }
     }
 
     @Override
     public void checkIfEmailAlreadyExists(String email) {
-        Optional<UserRequest> search = ofNullable(mapToDTO(userRepository.findUserByEmail(email)));
-        if (search.isPresent()){
+
+        UserRequest search = mapToDTO(userRepository.findUserByEmail(email));
+        if (!search.equals(null)){
             throw new ExceptionForEmailAlreadyExists("Email already registered "+ email);
         }
     }
