@@ -20,12 +20,14 @@ public class UserMapper {
                 .email(dto.getEmail())
                 .cpf(dto.getCpf())
                 .endereco(dto.getEndereco())
+                .createdDate(dto.getCreatedDate())
+                .lastModifiedDate(dto.getLastModifiedDate())
                 .build();
     }
 
 
-    public static UserRequest mapToDTO(User user){
-        return  UserRequest.builder()
+    public static UserRequest mapToUserDTO(User user){
+        return   UserRequest.builder()
                 .userId(user.getUserId())
                 .username(user.getUsername())
                 .birthDay(user.getBirthDay())
@@ -33,6 +35,8 @@ public class UserMapper {
                 .email(user.getEmail())
                 .cpf(user.getCpf())
                 .endereco(user.getEndereco())
+                .createdDate(user.getCreatedDate())
+                .lastModifiedDate(user.getLastModifiedDate())
                 .build();
     }
 

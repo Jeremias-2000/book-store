@@ -49,8 +49,13 @@ public class UserRequest  {
     @CPF(message = "invalid cpf")
     private String cpf;
 
-
+    @NotNull(message = "Endereço não pode ser nulo")
     private Endereco endereco;
+
+    @CreatedDate
+    private Date createdDate;
+    @LastModifiedDate
+    private Date lastModifiedDate;
 
 
 

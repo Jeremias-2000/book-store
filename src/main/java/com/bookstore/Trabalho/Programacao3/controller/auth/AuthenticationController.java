@@ -12,27 +12,27 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins="*")
 @RequestMapping("/api/v1/auth")
-
 public class AuthenticationController implements AbstractAuthenticationController {
 
 
     @Autowired
     private UserServiceImpl userService;
 
+    public AuthenticationController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
 
     @Override
-    public ResponseEntity<?> createUser(@Valid UserRequest dto) {
-        userService.createNewUser(dto);
-        return new ResponseEntity<>( HttpStatus.CREATED);
+    public ResponseEntity<?> createUser( UserRequest dto) {
+        return new ResponseEntity<>(userService.createNewUser(dto), HttpStatus.CREATED);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

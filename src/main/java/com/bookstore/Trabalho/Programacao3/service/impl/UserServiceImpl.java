@@ -18,13 +18,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 import static com.bookstore.Trabalho.Programacao3.mapper.UserMapper.*;
-import static java.util.Optional.*;
+
 
 
 @Service
@@ -39,7 +36,7 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
 
     @Override
     public Page<UserRequest> findUsers(Pageable pageable) {
-       return userRepository.findAll(pageable).map(UserMapper::mapToDTO);
+       return userRepository.findAll(pageable).map(UserMapper::mapToUserDTO);
 
     }
 
@@ -48,7 +45,7 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
     @Override
     public UserRequest findUserById(String userId) {
         return userRepository.findById(userId)
-                .map(UserMapper::mapToDTO)
+                .map(UserMapper::mapToUserDTO)
                 .orElseThrow(() ->
                         new UserNotFoundException("id does not exists  ==> " + userId + "\n"));
     }
@@ -72,8 +69,8 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
 
         user.setEndereco(endereco);
         checkIfUserIsNotNull(user);
-
-        return mapToDTO(userRepository.save(mapToModel(user)));
+        userRepository.save(UserMapper.mapToModel(user));
+        return user;
     }
 
     @Override
@@ -107,7 +104,7 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
     @Override
     public void checkIfEmailAlreadyExists(String email) {
 
-        UserRequest search = mapToDTO(userRepository.findUserByEmail(email));
+        UserRequest search = mapToUserDTO(userRepository.findUserByEmail(email));
         if (!search.equals(null)){
             throw new ExceptionForEmailAlreadyExists("Email already registered "+ email);
         }
