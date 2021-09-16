@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
+import java.util.Optional;
 
 import static com.bookstore.Trabalho.Programacao3.mapper.UserMapper.*;
 
@@ -68,7 +69,7 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
 
 
         user.setEndereco(endereco);
-        checkIfUserIsNotNull(user);
+        checkIfUserIsNotNull(Optional.ofNullable(user));
         userRepository.save(UserMapper.mapToModel(user));
         return user;
     }
@@ -89,14 +90,15 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
 
     @Override
     public void checkIfUserAlreadyExists(UserRequest dto) {
-        if (dto.getUsername().equals(userRepository.findUserByUsername(dto.getUsername()))){
+       /* User search = userRepository.findUserByUsername(dto.getUsername());
+        if (dto.equals(search)){
             throw new ExceptionPerExistingUser("the  user already exists" + dto);
-        }
+        }*/
     }
 
     @Override
-    public void checkIfUserIsNotNull(UserRequest dto) {
-            if (!dto.equals(null)){
+    public void checkIfUserIsNotNull(Optional<UserRequest> dto) {
+            if (!dto.isPresent()){
                 throw  new ExceptionByNullUser("the user is null " +  dto);
             }
     }
@@ -104,8 +106,8 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
     @Override
     public void checkIfEmailAlreadyExists(String email) {
 
-        UserRequest search = mapToUserDTO(userRepository.findUserByEmail(email));
-        if (!search.equals(null)){
+        boolean search =  userRepository.findUserByEmail(email).isPresent();
+        if (search == true){
             throw new ExceptionForEmailAlreadyExists("Email already registered "+ email);
         }
     }

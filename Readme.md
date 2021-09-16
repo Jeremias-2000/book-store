@@ -8,6 +8,8 @@ documentação básica (desculpem os deslizes)
 
 link: http://localhost:8080/swagger-ui.html#/
 
+deploy heroku:  https://book-deploy.herokuapp.com/swagger-ui.html#/
+
 
 ### 📋 Pré-requisitos
 

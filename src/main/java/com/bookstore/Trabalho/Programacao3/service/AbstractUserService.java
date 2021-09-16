@@ -16,11 +16,11 @@ public interface AbstractUserService<U> {
     U findUserById(String userId);
 
     U createNewUser(U user);
-    U updateUserById(String userId, UserRequest dto);
+    U updateUserById(String userId, U dto);
 
     void deleteUserById(String userId);
 
     void checkIfEmailAlreadyExists(String email);
-    void checkIfUserAlreadyExists(UserRequest dto);
-    void checkIfUserIsNotNull(UserRequest dto);
+    void checkIfUserAlreadyExists(U dto);
+    void checkIfUserIsNotNull(Optional<U> dto);
 }
