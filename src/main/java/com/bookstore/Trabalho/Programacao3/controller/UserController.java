@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 public interface UserController {
 
     @GetMapping("/all")
@@ -23,7 +25,9 @@ public interface UserController {
     @ApiOperation(value = "Retorna um usuário específico")
     ResponseEntity<?> findUserById(@PathVariable("userId") String userId);
 
-
+    @PostMapping("/signup")
+    @ApiOperation(value = "Cadastra um novo usuario")
+    ResponseEntity<?> createUser(@RequestBody @Valid UserRequest dto);
 
     @PutMapping("/update/id/{userId}")
 

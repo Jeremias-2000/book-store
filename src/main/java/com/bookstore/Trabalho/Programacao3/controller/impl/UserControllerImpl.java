@@ -14,9 +14,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -41,6 +44,10 @@ public class UserControllerImpl implements UserController {
         return ResponseEntity.ok(userService.findUserById(userId));
     }
 
+    @Override
+    public ResponseEntity<?> createUser( UserRequest dto) {
+        return new ResponseEntity<>(userService.createNewUser(dto), HttpStatus.CREATED);
+    }
 
     @Override
     @CacheEvict("user id")
@@ -54,5 +61,21 @@ public class UserControllerImpl implements UserController {
     public ResponseEntity<?> deleteUser(String userId) {
         userService.deleteUserById(userId);
         return ResponseEntity.ok().build();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String,String> handleValidationException(MethodArgumentNotValidException exception){
+        Map<String,String> errors = new HashMap<>();
+        exception.getBindingResult().getAllErrors().forEach(
+                (error) -> {
+
+                    String   fieldName = ((FieldError) error).getField();
+                    String errorMessage = error.getDefaultMessage();
+                    errors.put(fieldName,errorMessage);
+
+                });
+        return errors;
+
     }
 }
