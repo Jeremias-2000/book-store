@@ -2,6 +2,7 @@ package com.bookstore.Trabalho.Programacao3.dto.request;
 
 
 import com.bookstore.Trabalho.Programacao3.enums.BookGenre;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -29,15 +31,16 @@ public class BookRequest  {
     private String name;
     @NotBlank(message = "deve possuir alguma descrição")
     private String description;
-    @NotBlank(message = " Gênero do livro não informado")
+    @NotNull
     private BookGenre genre;
     @NotBlank(message = "autor do livro não informado")
     private String author;
-    @NotBlank
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
     private Date launchData;
-    @NotBlank
+    @NotNull
     private double price;
-    @NotBlank
+    @NotNull
     private int quantity;
 
 }

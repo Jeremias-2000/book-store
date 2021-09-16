@@ -17,19 +17,21 @@ import java.util.Map;
 
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins="*")
 @RequestMapping("/api/v1/auth")
-
 public class AuthenticationController implements AbstractAuthenticationController {
 
 
     @Autowired
     private UserServiceImpl userService;
 
+    public AuthenticationController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
 
     @Override
-    public ResponseEntity<?> createUser(UserRequest dto) {
+    public ResponseEntity<?> createUser( UserRequest dto) {
         return new ResponseEntity<>(userService.createNewUser(dto), HttpStatus.CREATED);
     }
 

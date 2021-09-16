@@ -18,7 +18,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-@EqualsAndHashCode
 public class User  {
 
     @Id
@@ -28,10 +27,8 @@ public class User  {
     private String password;
     private String email;
     private String cpf;
-    private Address address;
-    @CreatedDate
+    private Endereco endereco;
     private Date createdDate;
-    @LastModifiedDate
     private Date lastModifiedDate;
 
 

@@ -1,13 +1,16 @@
 package com.bookstore.Trabalho.Programacao3.service.impl;
 
 
+import com.bookstore.Trabalho.Programacao3.document.Endereco;
 import com.bookstore.Trabalho.Programacao3.document.User;
 import com.bookstore.Trabalho.Programacao3.dto.request.UserRequest;
 import com.bookstore.Trabalho.Programacao3.exception.*;
 import com.bookstore.Trabalho.Programacao3.mapper.UserMapper;
+import com.bookstore.Trabalho.Programacao3.repository.EnderecoRepository;
 import com.bookstore.Trabalho.Programacao3.repository.UserRepository;
 import com.bookstore.Trabalho.Programacao3.service.AbstractUserService;
 
+import com.bookstore.Trabalho.Programacao3.service.cep.ViaApiService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,13 +18,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 import static com.bookstore.Trabalho.Programacao3.mapper.UserMapper.*;
-import static java.util.Optional.*;
+
 
 
 @Service
@@ -30,12 +30,13 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
 
 
     private UserRepository userRepository;
-
+    private EnderecoRepository enderecoRepository;
+    private ViaApiService viaCepService;
 
 
     @Override
     public Page<UserRequest> findUsers(Pageable pageable) {
-       return userRepository.findAll(pageable).map(UserMapper::mapToDTO);
+       return userRepository.findAll(pageable).map(UserMapper::mapToUserDTO);
 
     }
 
@@ -44,7 +45,7 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
     @Override
     public UserRequest findUserById(String userId) {
         return userRepository.findById(userId)
-                .map(UserMapper::mapToDTO)
+                .map(UserMapper::mapToUserDTO)
                 .orElseThrow(() ->
                         new UserNotFoundException("id does not exists  ==> " + userId + "\n"));
     }
@@ -54,14 +55,22 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
     @Override
     public UserRequest createNewUser(UserRequest user) {
 
-        checkIfUserIsNotNull(ofNullable(user));
         checkIfUserAlreadyExists(user);
         checkIfEmailAlreadyExists(user.getEmail());
 
+        String cep = user.getEndereco().getCep();
+        //verifica se existe endereco
+        Endereco endereco =  enderecoRepository.findById(cep).orElseGet(() -> {
+            Endereco novoEndereco = viaCepService.consultarCep(cep);
+            enderecoRepository.save(novoEndereco);
+            return novoEndereco;
+        });
 
-        userRepository.save(mapToModel(user));
 
-        return user ;
+        user.setEndereco(endereco);
+        checkIfUserIsNotNull(user);
+        userRepository.save(UserMapper.mapToModel(user));
+        return user;
     }
 
     @Override
@@ -86,16 +95,17 @@ public class UserServiceImpl implements AbstractUserService<UserRequest> {
     }
 
     @Override
-    public void checkIfUserIsNotNull(Optional<UserRequest> dto) {
-            if (!dto.isPresent()){
+    public void checkIfUserIsNotNull(UserRequest dto) {
+            if (!dto.equals(null)){
                 throw  new ExceptionByNullUser("the user is null " +  dto);
             }
     }
 
     @Override
     public void checkIfEmailAlreadyExists(String email) {
-        Optional<UserRequest> search = ofNullable(mapToDTO(userRepository.findUserByEmail(email)));
-        if (search.isPresent()){
+
+        UserRequest search = mapToUserDTO(userRepository.findUserByEmail(email));
+        if (!search.equals(null)){
             throw new ExceptionForEmailAlreadyExists("Email already registered "+ email);
         }
     }

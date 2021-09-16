@@ -12,8 +12,7 @@ import javax.validation.Valid;
 
 public interface AbstractAuthenticationController {
 
-   /* @PostMapping("/login")
-    ResponseEntity<?> authenticate(@RequestBody @Valid Login login) throws Exception;*/
+
 
 
     @PostMapping("/signup")

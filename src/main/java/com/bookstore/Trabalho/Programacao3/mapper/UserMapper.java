@@ -19,20 +19,24 @@ public class UserMapper {
                 .password(dto.getPassword())
                 .email(dto.getEmail())
                 .cpf(dto.getCpf())
-                .address(dto.getAddress())
+                .endereco(dto.getEndereco())
+                .createdDate(dto.getCreatedDate())
+                .lastModifiedDate(dto.getLastModifiedDate())
                 .build();
     }
 
 
-    public static UserRequest mapToDTO(User user){
-        return  UserRequest.builder()
+    public static UserRequest mapToUserDTO(User user){
+        return   UserRequest.builder()
                 .userId(user.getUserId())
                 .username(user.getUsername())
                 .birthDay(user.getBirthDay())
                 .password(user.getPassword())
                 .email(user.getEmail())
                 .cpf(user.getCpf())
-                .address(user.getAddress())
+                .endereco(user.getEndereco())
+                .createdDate(user.getCreatedDate())
+                .lastModifiedDate(user.getLastModifiedDate())
                 .build();
     }
 
