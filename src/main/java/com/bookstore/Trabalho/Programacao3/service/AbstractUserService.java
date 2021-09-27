@@ -22,5 +22,5 @@ public interface AbstractUserService<U> {
 
     void checkIfEmailAlreadyExists(String email);
     void checkIfUserAlreadyExists(U dto);
-    void checkIfUserIsNotNull(Optional<U> dto);
+    void checkIfUserIsNull(Optional<U> dto);
 }

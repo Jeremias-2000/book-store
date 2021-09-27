@@ -3,7 +3,7 @@ package com.bookstore.Trabalho.Programacao3.document;
 
 import lombok.*;
 
-import org.springframework.data.annotation.CreatedDate;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -28,8 +28,9 @@ public class User  {
     private String email;
     private String cpf;
     private Endereco endereco;
-    private Date createdDate;
-    private Date lastModifiedDate;
+    private LocalDate createdDate;
+    private LocalDate lastModifiedDate;
+
 
 
 }

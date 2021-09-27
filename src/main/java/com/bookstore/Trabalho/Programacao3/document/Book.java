@@ -12,6 +12,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Document
@@ -28,7 +29,7 @@ public class Book {
     private String description;
     private BookGenre genre;
     private String author;
-    private Date launchData;
+    private LocalDate launchData;
     private double price;
     private int quantity;
 

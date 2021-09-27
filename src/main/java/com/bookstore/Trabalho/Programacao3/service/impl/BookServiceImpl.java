@@ -42,7 +42,7 @@ public class BookServiceImpl implements AbstractBookService<BookRequest>{
         return bookRepository.findById(bookId)
                 .map(BookMapper::mapToDTO)
                 .orElseThrow(() ->
-                        new BookNotFounException("The book does not exists" + bookId));
+                        new BookNotFounException("The book does not exists " + bookId));
     }
 
     @Override
@@ -55,7 +55,6 @@ public class BookServiceImpl implements AbstractBookService<BookRequest>{
     @Override
     public BookRequest createBook(BookRequest dto) {
          checkIfBookIsNull(ofNullable(dto));
-         checkIfBookAlreadyRegistered(dto);
          bookRepository.save(BookMapper.mapToModel(dto));
          return dto;
     }

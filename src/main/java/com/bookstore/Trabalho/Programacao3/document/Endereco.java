@@ -29,4 +29,7 @@ public class Endereco {
     private String ddd;
     private String siafi;
 
+    public Endereco(String cep) {
+        this.cep = cep;
+    }
 }

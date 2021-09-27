@@ -53,9 +53,13 @@ public class UserRequest  {
     private Endereco endereco;
 
     @CreatedDate
-    private Date createdDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
+    private LocalDate createdDate;
     @LastModifiedDate
-    private Date lastModifiedDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
+    private LocalDate lastModifiedDate;
+
+
 
 
 
